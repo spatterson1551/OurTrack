@@ -3,8 +3,10 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="bootstrap/jquery/jquery-2.0.3.js"></script>
+  <script src="js/createTrack.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="css/mainLayout.css" rel="stylesheet">
+  <link href="css/create.css" rel="stylesheet">
   <title>OurTrack</title>
 </head>
 <body>
@@ -53,10 +55,15 @@
         <h2> Post a Track </h2>
         <form action="#" method="POST" role="form" class="form-group" style="margin-bottom: 100px;">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Track Title..." style="margin-bottom: 10px;">
-            <textarea class="form-control" rows="3" placeholder="Track Description..." style="margin-bottom: 10px;"></textarea>
+            <input id="title" type="text" class="form-control" placeholder="Track Title..." style="margin-bottom: 10px;">
+          </div>
+          <div class="form-group">
+            <textarea id="description" class="form-control" rows="3" placeholder="Track Description..." style="margin-bottom: 10px;"></textarea>
+          </div>
+          <div class="form-group">
             <label class="control-label" for="category">Category:</label>
             <select id="category" class="form-control" style="margin-bottom: 10px;">
+              <option>Select A Category</option>
               <option>Alternative</option>
               <option>Blues</option>
               <option>Classical</option>
@@ -88,21 +95,33 @@
               <option>Trap</option>
               <option>World</option>
             </select> 
-            <label class="control-label" for="tags">Enter tags seperated by commas:</label>
-            <input type="text" id="tags" class="form-control" placeholder="Tags..." style="margin-bottom: 10px">
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="tags">Input a tag and hit enter to add it</label>
+            <div id="tagSection"></div>
+            <input type="text" id="tags" class="form-control" placeholder="Enter a Tag" style="margin-bottom: 10px">
+            <!--<div id="tags" class="form-control" contenteditable="true"></div>-->
+          </div>
+          <div class="form-group">
             <label class="control-label" for="trackUpload"> Select the track you wish to upload: </label>
             <input type="file" id="trackUpload" class="form-control">
+          </div>
+          <div class="form-group">
             <label class="control-label" for="imgUpload"> Select the image to associate with the track: </label>
             <input type="file" id="imgUpload" class="form-control">
+          </div>
+          <div class="form-group">
             <div class="col-xs-12">
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" value="remember"> Show Collaborators Only
+                  <input id="collaborators" type="checkbox" value="remember"> Show Collaborators Only
                 </label>
               </div>
             </div>
-            <br>
-            <input type="submit" class="btn btn-large btn-success btn-block" value="Create" style="margin-bottom: 10px;">
+          </div>
+          <br>
+          <div class="form-group">
+            <input id="submit" type="submit" class="btn btn-large btn-success btn-block" value="Create" style="margin-bottom: 10px;">
           </div>
         </form>
       </div>
