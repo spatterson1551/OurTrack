@@ -97,3 +97,46 @@ $(document).ready( function () {
 		}
 	});
 });
+
+
+//FILE UPLOADING
+function _(el){
+	return document.getElementById(el);
+} 
+function uploadFile(){
+	var file = _("trackupload").files[0];
+	//alert(file.name+" | "+file.size+" | "+file.type);
+	var formdata = new FormData();
+	formdata.append("file1", file);
+	var ajax = new XMLHttpRequest();
+	ajax.upload.addEventListener("progress", progressHandler, false);
+	ajax.addEventListener("load", completeHandler, false);
+	ajax.addEventListener("error", errorHandler, false);
+	ajax.addEventListener("abort", abortHandler, false);
+	
+	if(file.type =="audio/wav" || file.type =="audio/mp3")
+	{
+		ajax.open("POST", "dummyPHP.php");
+		ajax.send(formdata);
+	}
+	else validationHandler();
+}
+function progressHandler(event){
+	_("loaded_n_total").innerHTML = "Uploaded "+event.loaded+" bytes of "+event.total;
+	var percent = (event.loaded / event.total) * 100;
+	_("progressBar").value = Math.round(percent);
+	_("status").innerHTML = Math.round(percent)+"% uploaded... please wait";
+}
+function completeHandler(event){
+	_("status").innerHTML = event.target.responseText;
+	//_("progressBar").value = 0;
+}
+function errorHandler(event){
+	_("status").innerHTML = "Upload Failed";
+}
+function abortHandler(event){
+	_("status").innerHTML = "Upload Aborted";
+}
+function validationHandler(){
+	_("status").innerHTML = "Invalid file type";
+}
