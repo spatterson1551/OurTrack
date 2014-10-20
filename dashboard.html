@@ -3,6 +3,7 @@
   <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="bootstrap/jquery/jquery-2.0.3.js"></script>
+    <script src="js/editBio.js"></script>
   	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/mainLayout.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet">
@@ -212,12 +213,12 @@
                 <h3> <small> BIOGRAPHY </small> </h3>
               </div>
               <div class="col-xs-6 seeAllButton">
-                edit
+                <a href="" data-toggle="modal" data-target="#bioModal"> <span class="glyphicon glyphicon-pencil"></span></a>
               </div>
             </div>
             <div class="row">
               <p>
-                This is a short bio about the user that will give basic info about that person
+                This is a short bio about the user that will give basic info about that person that the user can edit.
               </p>
             </div>
           </div>
@@ -252,6 +253,28 @@
               <a href="#">username1</a> <br>
               <a href="#">username2</a> <br>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="bioModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <b> Edit Your Bio </b>
+            <button type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal" aria-hidden="true"></button>
+          </div>
+          <div class="modal-body" id="bioModalBody">
+            <div class="errors">
+            </div>
+            <div id="bioForm">
+              <textarea class="form-control" id="bioContent" value="This is a short bio about the user that will give basic info about that person that the user can edit." name="bio" cols="50" rows="10">This is a short bio about the user that will give basic info about that person that the user can edit.
+              </textarea>
+            </div>
+          </div>
+          <div class="modal-footer" id="bioModalFooter">
+            <button type="button" class="btn btn-default btn-sm" id="saveBio"> Save </button>
           </div>
         </div>
       </div>
@@ -297,30 +320,6 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default btn-sm"> Login </button>
-                </div>
-          </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                   <b> Send {{ $user->username }} a Message </b>
-                   <button type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal" aria-hidden="true"></button>
-                </div>
-                <div class="modal-body" id="messageModalBody">
-                  <div class="errors">
-                  </div>
-                  <div id="messageForm">
-                    <textarea class="form-control" id="messageContent" name="message" placeholder="Message..."></textarea>
-                  </div>
-                  <div id="messageSuccess">
-                    Your message has been sent!
-                  </div>
-                </div>
-                <div class="modal-footer" id="messageModalFooter">
-            <button type="button" class="btn btn-default btn-sm" id="sendMessage"> Send </button>
                 </div>
           </div>
         </div>
