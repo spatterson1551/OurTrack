@@ -39,14 +39,7 @@ $("#email").keyup(function(event){
 });
 
 $("#pass").keyup(function(){
-	if($("#pass").val())
-	{
-		$("#pass").parent().removeClass("has-warning");
-		$("#pass").parent().removeClass("has-error");
-		$("#pass").parent().addClass("has-success");
-		isPass = true;
-	}
-	else
+	if(!($("#pass").val()))
 	{
 		$("#pass").parent().removeClass("has-error");
 		$("#pass").parent().removeClass("has-success");
@@ -54,20 +47,26 @@ $("#pass").keyup(function(){
 		
 		isPass = false;
 	}
-}).blur(function(){
-	if($("#pass").val())
+	else
 	{
-		$("#pass").parent().removeClass("has-warning");
-		$("#pass").parent().removeClass("has-error");
-		$("#pass").parent().addClass("has-success");
 		isPass = true;
 	}
-	else
+}).blur(function(){
+	if(!($("#pass").val()))
 	{
 		$("#pass").parent().removeClass("has-warning");
 		$("#pass").parent().removeClass("has-success");
 		$("#pass").parent().addClass("has-error");
+		isPass = false;
 	}
+	else
+	{
+		isPass = true;
+	}
+}).focus(function(){
+	$("#pass").parent().removeClass("has-warning");
+	$("#pass").parent().removeClass("has-success");
+	$("#pass").parent().removeClass("has-error");
 });
 
 $("#submit").click(function(event){
