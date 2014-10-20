@@ -1,0 +1,63 @@
+/* this is all some stuff to make the footer "sticky" which means it always snaps to bottom no matter what, even
+if theres nothing on the page or the window is resized. */
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 205px;
+	background: rgb(248, 248, 248);
+	padding-top: 50px;
+}
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 205px;
+	background-color: #f5f5f5;
+}
+
+#footerDiv {
+	background: #fff; 
+	padding-top: 15px; 
+	border-top-width: 1px; 
+	border-top-style: solid; 
+	border-top-color: #ddd; 
+	height: 180px;
+}
+
+#copyright {
+	background: #f2f2f2; 
+	text-align: center; 
+	height:25px; 
+	padding-top:2px; 
+	padding-top:2px; 
+	border-top-width: 1px; 
+	border-top-style: solid; 
+	border-top-color: #ddd;
+}
+
+#copyright p {
+	margin-bottom: 0px; 
+	color: #666;
+}
+
+/* this overwrites the background property that bootstrap defines for its "navbar-default" class */
+.navbar-default {
+	background: #fff;
+}
+
+/* this overwrites the color property that bootstrap defines for its "navbar-brand" part of the navbar,
+which is basically where you are supposed to put your logo. Its currently purple, but once we decide
+on a main color for the website we can update it */
+.navbar-default .navbar-brand {
+	color: #77216F;
+}
+
+/* this just puts more space between the links and the search bar, kinda a hackish way of doing it but it works */
+#spacer {
+	height: 10px;
+	width: 50px;
+}

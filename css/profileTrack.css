@@ -1,0 +1,89 @@
+.profileTrack {
+	float: left;
+	margin-bottom: .714em;
+	width: 57.143em;
+	height: 12.143em;
+	border-bottom-width: 1px;
+	border-bottom-color: #DDD;
+	border-bottom-style: solid;
+	background: #fff;
+}
+
+.trackImage {
+	float: left;
+	width: 14.286em;
+	padding: .714em;
+	height: 10.714em;
+	/*background: #D3F;*/
+}
+
+.trackContent {
+	float: left;
+	width: 42.857em;
+	height: 10.714em;
+	/*background: #C5A;*/
+}
+
+.trackTitleOwnerTeaser {
+	float: left;
+	width: 34.286em;
+	height: 8.571em;
+	margin-top: 1.429em;
+	margin-left: 1.429em;
+	/*background: #A54DD3;*/
+}
+
+.trackTitle {
+	float: left;
+	height: 1.429em;
+	/*background: #FF0000;*/
+}
+
+.trackOwner {
+	float: left;
+	height: 1.429em;
+	/*background: #0000FF;*/
+	margin-left: .357em;
+}
+
+.trackLikes {
+	float: left;
+	width: 80px;
+	text-align: center;
+	padding-top: 1.429em;
+	/*background: #00FF00;*/
+}
+
+.trackAudio {
+	float: left;
+	width: 21.429em;
+	margin-top: .357em;
+	/*background: #FFFF00;*/
+}
+
+.trackTags {
+	float: left;
+	width: 20em;
+	min-height: .357em;
+	margin-left: 1.429em;
+	/*background: #FF00FF;*/
+}
+
+.trackTag {
+	float: left;
+	background: #333;
+	padding-left: .25em;
+	padding-right: .25em;
+	border-radius: .25em;
+	margin-right: .25em;
+	font-size: 12px;
+	color: #fff;
+}
+
+.trackCatDate {
+	float: left;
+	width: 22.083em;
+	text-align: right;
+	/*background: #F59088;*/
+	font-size: 12px;
+}

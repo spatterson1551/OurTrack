@@ -1,0 +1,20 @@
+body {
+	background: #fff;
+}
+
+#userBio {
+	padding-left: 0em;
+}
+
+.modal-header {
+	height: 3.571em;
+}
+
+.sideHeader {
+	padding-left: 0em;
+}
+
+.seeAllButton {
+	padding-top: 1.429em;
+	text-align: right;
+}

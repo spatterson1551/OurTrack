@@ -1,0 +1,61 @@
+body {
+	background: #fff;
+}
+
+#categoryBox {
+	background: #fff;
+	border-right: 1px solid #888;
+	height: 500px;
+	overflow-y: scroll;
+	margin-top: 1.5em;
+}
+
+.categoryListItem {
+	background: #fff;
+	border-bottom: 1px solid #DDD;
+	height: 2em;
+	padding: 5px;
+}
+
+#categorySelected {
+	background: #77216F;
+	color: #fff;
+}
+
+.trackListElement {
+	margin-bottom:1.5em;
+	padding:1.5em 0;
+	border-bottom:1px solid #DDD;
+}
+
+.trackThumb {
+	text-align:center;
+}
+
+.audioPlayer {
+	width:100%;
+}
+
+.audioSection {
+	margin-bottom:2.8em;
+}
+
+.tag {
+	float:left;
+	background: #333;
+	border-radius: .25em;
+	font-size: 12px;
+	color: #fff;
+	width:3em;
+	text-align:center;
+	margin-right:.2em;
+	margin-bottom:.2em;
+}
+
+.trackCatDate {
+	float:right;
+}
+
+.right {
+	float:right;
+}

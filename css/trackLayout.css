@@ -1,0 +1,150 @@
+#trackHead
+{
+	height: 10.714em;
+	margin-top:3.357em;
+	margin-bottom:5.357em;
+}
+
+.tCenter
+{
+	text-align:Center;
+}
+
+body 
+{
+	background: #fff;
+}
+
+.trackReply
+{
+	margin-top:1.5em;
+	padding:1.5em 0;
+	border-bottom:1px solid #EEEBEB;
+}
+
+.trackReply:last-child
+{
+	margin-bottom:1.5em;
+}
+
+.trackThumb
+{
+	text-align:center;
+}
+
+
+.border{border:1px solid black}
+
+.audioPlayer
+{
+	width:100%;
+}
+
+.topAudioPlayer
+{
+	margin-bottom:3.5em;
+	width:100%;
+}
+
+.topTrackInfo
+{
+	margin-bottom:2em;
+}
+
+.audioSection
+{
+	margin-bottom:2.8em;
+}
+
+.tag
+{
+	float:left;
+	background: #333;
+	border-radius: .25em;
+	font-size: 12px;
+	color: #fff;
+	width:3em;
+	text-align:center;
+	margin-right:.2em;
+	margin-bottom:.2em;
+}
+
+.trackCatDate
+{
+	float:right;
+}
+
+.comment
+{
+	margin-top:2em;
+	border-bottom:1px solid #EEEBEB;
+}
+
+.comment:last-child
+{
+	margin-bottom:2em;
+}
+
+.right{float:right;}
+
+.username
+{
+	text-align:center;
+}
+
+.timeStamp
+{
+	font-size:.8em;
+	color:grey;
+}
+
+.commentText
+{
+	border:1px solid black;
+	border-radius:4px;
+}
+
+.username a
+{
+	color:black;
+}
+
+.username a:hover
+{
+	text-decoration:none;
+}
+
+#commentEditor
+{
+	margin-top:2em;
+	width:35em;
+	height:10em;
+}
+
+textarea {
+   resize: none;
+}
+
+.actionSpan
+{
+	color:blue;
+}
+
+.actionSpan:hover
+{
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+#discoverPanel
+{
+	margin-top:3.357em;
+	width:100%;
+	border:1px solid black;
+	padding:.5em;
+}
+
+.dropDownSort
+{
+	margin-top:1em;
+}
