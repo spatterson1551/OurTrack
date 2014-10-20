@@ -58,17 +58,20 @@
       <div class="col-xs-4 col-xs-offset-1">
         <h2> Login Below</h2>
         <form action="#" method="POST" role="form" class="form-group">
-          <div class="form-group">
-            <input type="email" class="form-control" placeholder="email@domain.com" style="margin-bottom: 10px;">
-            <input type="password" class="form-control" placeholder="Password" style="margin-bottom: 10px;">
-            <div class="col-xs-12">
+			<div class="form-group">
+				<input type="email" id="email" class="form-control" placeholder="email@domain.com" style="margin-bottom: 10px;">
+			</div>
+			<div class="form-group">
+				<input type="password" id="pass" class="form-control" placeholder="Password" style="margin-bottom: 10px;">
+            </div>
+			<div class="col-xs-12">
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value="remember"> Remember Me
                 </label>
               </div>
             </div>
-            <input type="submit" class="btn btn-large btn-success btn-block" value="Log In" style="margin-bottom: 10px;">
+            <input type="submit" id="submit" class="btn btn-large btn-success btn-block" value="Log In" style="margin-bottom: 10px;">
           </div>
         </form>
       </div>
@@ -79,6 +82,7 @@
 
   <!-- This is here at the bottom so that we can load parts of the page before we load the js file, which makes the website run a little faster -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/signinValidation.js"></script>
 
 
     <!--************* begin footer ****************-->

@@ -60,12 +60,21 @@
       <div class="col-xs-4 col-xs-offset-1">
         <h2> Sign Up. It's Easy!</h2>
         <form action="#" method="POST" role="form" class="form-group">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="User Name" style="margin-bottom: 10px;">
-            <input type="email" class="form-control" placeholder="email@domain.com" style="margin-bottom: 10px;">
-            <input type="password" class="form-control" placeholder="Password" style="margin-bottom: 10px;">
-            <input type="password" class="form-control" placeholder="Confirm Password" style="margin-bottom: 10px;">
-            <input type="submit" class="btn btn-large btn-success btn-block" value="Sign Up" style="margin-bottom: 10px;">
+			<div class="form-group">
+				<input type="text" class="form-control" id="userName"placeholder="User Name" style="margin-bottom: 10px;">
+			</div>
+			<div class="form-group">
+				<input type="email" class="form-control" id="email" placeholder="email@domain.com" style="margin-bottom: 10px;">
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="firstPass" placeholder="Password" style="margin-bottom: 10px;">
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="secondPass" placeholder="Confirm Password" style="margin-bottom: 10px;">
+			</div>
+			<div class="form-group">
+				<input type="submit" id="submit" class="btn btn-large btn-success btn-block" value="Sign Up" style="margin-bottom: 10px;">
+			</div>
           </div>
         </form>
       </div>
@@ -76,6 +85,7 @@
 
   <!-- This is here at the bottom so that we can load parts of the page before we load the js file, which makes the website run a little faster -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/signupValidation.js"></script>
 
 
     <!--************* begin footer ****************-->
