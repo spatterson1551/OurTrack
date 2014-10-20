@@ -83,6 +83,17 @@ $(document).ready( function () {
 			alert("submit Successful");
 		} else {
 			event.preventDefault();
+			//show red for errors.
+			if (!goodTitle) {
+				$("#title").parent().addClass('has-error');
+			}
+			if (!goodDescription) {
+				$("#description").parent().addClass('has-error');
+			}
+			if (!goodCategory) {
+				$("#category").parent().addClass('has-error');
+			}
+			$('html, body').animate({ scrollTop: 0 }, "slow");
 		}
 	});
 });
