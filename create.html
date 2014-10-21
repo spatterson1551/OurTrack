@@ -103,16 +103,32 @@
             <!--<div id="tags" class="form-control" contenteditable="true"></div>-->
           </div>
           <div class="form-group">
-            <label class="control-label" for="trackUpload"> Select the track you wish to upload: </label>
-            <input type="file" name="file1" id="trackUpload" class="form-control">
-			<input type="button" value="Upload File" onclick="uploadFile()">
-			<progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-			<h3 id="status"></h3>
-			<p id="loaded_n_total"></p>
+              <label class="control-label" for="trackUpload"> Select the track you wish to upload: </label>
           </div>
           <div class="form-group">
-            <label class="control-label" for="imgUpload"> Select the image to associate with the track: </label>
-            <input type="file" id="imgUpload" class="form-control">
+            <div class="fileSelector" id="audioSelector">
+              <span id="audioText">Click anywhere to select a file</span>
+                <input id="trackuploadbutton" type="button" value="Upload File">
+              <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+              <span id="audioGlyph" class="dummy"></span>
+              <span id="audioCancelGlyph" class="glyphicon glyphicon-remove"></span>
+              <span id="status"></span>
+            </div>
+            <input type="file" name="file1" id="trackupload" class="upload">
+          </div>
+          <div class="form-group">
+              <label class="control-label" for="imageUpload"> Select the image to associate with the track: </label>
+          </div>
+          <div class="form-group">
+            <div class="fileSelector" id="imageSelector">
+              <span id="imageText">Click anywhere to select a file</span>
+                <input id="imageUploadButton" type="button" value="Upload File">
+              <progress id="imageProgressBar" value="0" max="100" style="width:300px;"></progress>
+              <span id="imageGlyph" class="dummy"></span>
+              <span id="imageCancelGlyph" class="glyphicon glyphicon-remove"></span>
+              <span id="imageStatus"></span>
+            </div>
+            <input type="file" name="file2" id="imageupload" class="upload">
           </div>
           <div class="form-group">
             <div class="col-xs-12">

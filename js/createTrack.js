@@ -2,6 +2,9 @@ $(document).ready( function () {
 	var goodTitle = false;
 	var goodDescription = false;
 	var goodCategory = false;
+	audioDivEnabled = true;
+	imageDivEnabled = true;
+	//goodTrack and goodImage will be set correctly below
 
 	$("#title").blur( function(event) {
 		if ($(this).val()) {   //the value isnt empty so there is some text NOTE: $(this) refers to the element which the event listener is attache to, i.e ("#title")
@@ -99,44 +102,192 @@ $(document).ready( function () {
 });
 
 
-//FILE UPLOADING
 function _(el){
 	return document.getElementById(el);
 } 
-function uploadFile(){
+//TRACK UPLOADING:
+$(function() {
+	$("#trackuploadbutton").click(function(event) {
+	event.stopPropagation();
 	var file = _("trackupload").files[0];
 	//alert(file.name+" | "+file.size+" | "+file.type);
 	var formdata = new FormData();
-	formdata.append("file1", file);
+	formdata.append("trackupload", file);
 	var ajax = new XMLHttpRequest();
-	ajax.upload.addEventListener("progress", progressHandler, false);
-	ajax.addEventListener("load", completeHandler, false);
-	ajax.addEventListener("error", errorHandler, false);
-	ajax.addEventListener("abort", abortHandler, false);
+	ajax.upload.addEventListener("progress", audioProgressHandler, false);
+	ajax.addEventListener("load", audioCompleteHandler, false);
+	ajax.addEventListener("error", audioErrorHandler, false);
 	
-	if(file.type =="audio/wav" || file.type =="audio/mp3")
+	//audio validation
+	if(file.type =="audio/wav" || file.type =="audio/mp3" || file.type =="audio/aac" || file.type == "audio/mpeg" || file.type == "audio/x-wav")
 	{
 		ajax.open("POST", "dummyPHP.php");
 		ajax.send(formdata);
 	}
-	else validationHandler();
-}
-function progressHandler(event){
-	_("loaded_n_total").innerHTML = "Uploaded "+event.loaded+" bytes of "+event.total;
+	else {
+		_("status").innerHTML = "Invalid file type";
+		$("#audioGlyph").css("visibility", "visible");
+		$("#audioGlyph").css("color", "red");
+		$("#audioGlyph").attr("class", "glyphicon glyphicon-exclamation-sign");
+	}
+
+	return false;
+});
+	});
+function audioProgressHandler(event){
+	//_("loaded_n_total").innerHTML = "Uploaded "+event.loaded+" bytes of "+event.total;
 	var percent = (event.loaded / event.total) * 100;
 	_("progressBar").value = Math.round(percent);
-	_("status").innerHTML = Math.round(percent)+"% uploaded... please wait";
+	//_("status").innerHTML = Math.round(percent)+"% uploaded... please wait";
 }
-function completeHandler(event){
-	_("status").innerHTML = event.target.responseText;
+function audioCompleteHandler(event){
+	//_("status").innerHTML = event.target.responseText;
+	goodTrack = true;
 	//_("progressBar").value = 0;
+	$("#audioGlyph").css("visibility", "visible");
+	$("#audioGlyph").attr("class", "glyphicon glyphicon-ok");
+	$("#audioGlyph").css("color", "#00CC00");
+	$("#audioCancelGlyph").css("visibility", "visible");
+	$("#trackuploadbutton").css("visibility", "hidden");
+	audioDivEnabled = false;
 }
-function errorHandler(event){
+function audioErrorHandler(event){
 	_("status").innerHTML = "Upload Failed";
+	$("#audioGlyph").css("visibility", "visible");
+	$("#audioGlyph").css("color", "red");
+	$("#audioGlyph").attr("class", "glyphicon glyphicon-exclamation-sign");
 }
-function abortHandler(event){
-	_("status").innerHTML = "Upload Aborted";
+$(function() {
+$("#trackupload:file").change(function (){
+	var fileName = $(this).val();
+       $("#trackuploadbutton").css("visibility", "visible");
+        $("#progressBar").css("visibility", "visible");
+        $("#audioGlyph").css("visibility", "hidden");
+        $("#audioCancelGlyph").css("visibility", "hidden");
+       $("#status").html("");
+       $("#audioText").html(fileName);
+       if(fileName ==""){
+   		$("#audioText").html("Click anywhere to select a file");
+   		$("#trackuploadbutton").css("visibility", "hidden");
+    	$("#progressBar").css("visibility", "hidden");
+       }
+     });
+});
+$(function() {
+	$("#audioSelector").click(function(event) {
+		if(audioDivEnabled)
+		{
+			$(this).siblings('#trackupload').click();
+		}
+	});
+});
+$(function() {
+	$("#audioCancelGlyph").click(function(event) {
+		event.stopPropagation();
+		reset();
+	});
+});
+//resets file upload field
+function reset(){
+	audioDivEnabled = true;
+	_("progressBar").value = 0;
+	$("#audioText").html("Click anywhere to select a file");
+	 $("#trackuploadbutton").css("visibility", "hidden");
+    $("#progressBar").css("visibility", "hidden");
+    $("#audioGlyph").css("visibility", "hidden");
+    $("#audioCancelGlyph").css("visibility", "hidden");
+    $("#status").html("");
+    $("#trackupload:file").val("");
 }
-function validationHandler(){
-	_("status").innerHTML = "Invalid file type";
+
+
+//PICTURE VALIDATION
+$(function() {
+	$("#imageUploadButton").click(function(event) {
+	event.stopPropagation();
+	var file = _("imageupload").files[0];
+	//alert(file.name+" | "+file.size+" | "+file.type);
+	var formdata = new FormData();
+	formdata.append("imageupload", file);
+	var ajax = new XMLHttpRequest();
+	ajax.upload.addEventListener("progress", imageProgressHandler, false);
+	ajax.addEventListener("load", imageCompleteHandler, false);
+	ajax.addEventListener("error", imageErrorHandler, false);
+	
+	//audio validation
+	if(file.type =="image/png" || file.type =="image/jpg" || file.type =="image/jpeg")
+	{
+		ajax.open("POST", "dummyPHP.php");
+		ajax.send(formdata);
+	}
+	else {
+		_("imageStatus").innerHTML = "Invalid file type";
+		$("#imageGlyph").css("visibility", "visible");
+		$("#imageGlyph").css("color", "red");
+		$("#imageGlyph").attr("class", "glyphicon glyphicon-exclamation-sign");
+	}
+
+	return false;
+});
+	});
+function imageProgressHandler(event){
+	var percent = (event.loaded / event.total) * 100;
+	_("imageProgressBar").value = Math.round(percent);
+}
+function imageCompleteHandler(event){
+	goodImage = true;
+	$("#imageGlyph").css("visibility", "visible");
+	$("#imageGlyph").attr("class", "glyphicon glyphicon-ok");
+	$("#imageGlyph").css("color", "#00CC00");
+	$("#imageCancelGlyph").css("visibility", "visible");
+	$("#imageUploadButton").css("visibility", "hidden");
+	imageDivEnabled = false;
+}
+function imageErrorHandler(event){
+	_("imageStatus").innerHTML = "Upload Failed";
+	$("#imageGlyph").css("visibility", "visible");
+	$("#imageGlyph").css("color", "red");
+	$("#imageGlyph").attr("class", "glyphicon glyphicon-exclamation-sign");
+}
+$(function() {
+$("#imageupload:file").change(function (){
+	var fileName = $(this).val();
+       $("#imageUploadButton").css("visibility", "visible");
+        $("#imageProgressBar").css("visibility", "visible");
+        $("#imageGlyph").css("visibility", "hidden");
+        $("#imageCancelGlyph").css("visibility", "hidden");
+       $("#imageStatus").html("");
+       $("#imageText").html(fileName);
+       if(fileName ==""){
+   		$("#imageText").html("Click anywhere to select a file");
+   		$("#imageUploadButton").css("visibility", "hidden");
+    	$("#imageProgressBar").css("visibility", "hidden");
+       }
+     });
+});
+$(function() {
+	$("#imageSelector").click(function(event) {
+		if(imageDivEnabled)
+		{
+			$(this).siblings('#imageupload').click();
+		}
+	});
+});
+$(function() {
+	$("#imageCancelGlyph").click(function(event) {
+		event.stopPropagation();
+		imageReset();
+	});
+});
+//resets file upload field
+function imageReset(){
+	imageDivEnabled = true;
+	_("imageProgressBar").value = 0;
+	$("#imageText").html("Click anywhere to select a file");
+	 $("#imageUploadButton").css("visibility", "hidden");
+    $("#imageProgressBar").css("visibility", "hidden");
+    $("#imageGlyph").css("visibility", "hidden");
+    $("#imageCancelGlyph").css("visibility", "hidden");
+    $("#imageStatus").html("");
+   $("#imageupload:file").val("");
 }

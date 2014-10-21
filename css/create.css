@@ -10,3 +10,52 @@
 	border-radius:2px;
 	float:left;
 }
+
+#trackuploadbutton, #progressBar, #audioGlyph, #audioCancelGlyph, 
+#imageUploadButton, #imageProgressBar, #imageGlyph, #imageCancelGlyph {
+	visibility: hidden;
+}
+
+.fileSelector {
+	background: white;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	height: 2.5em;
+	padding: .2em;
+}
+
+.upload {
+	visibility: hidden;
+}
+
+
+/*PROGRESS BARS*/
+/*IE*/
+progress {  
+    /* style rules */  
+     background-color: #f3f3f3;  
+    border: 0;  
+    height: 18px;  
+    border-radius: 9px;  
+    color: purple; 
+}  
+/*chrome*/
+progress::-webkit-progress-bar {  
+    /* style rules */  
+     background-color: #f3f3f3;  
+    height: 18px;  
+    border-radius: 9px;  
+}  
+progress::-webkit-progress-value {  
+    /* style rules */  
+    background: purple;
+    height: 18px;  
+    border-radius: 9px;  
+}  
+/*firefox*/
+progress::-moz-progress-bar {  
+    /* style rules */  
+    background: purple;  
+    height: 18px;  
+    border-radius: 9px; 
+}  
