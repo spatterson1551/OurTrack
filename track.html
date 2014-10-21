@@ -3,6 +3,9 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="bootstrap/jquery/jquery-2.0.3.js"></script>
+  <script src="js/likeTrack.js"></script>
+  <script src="js/likeReply.js"></script>
+  <script src="js/changeSortMethod.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="css/mainLayout.css" rel="stylesheet">
   <link href="css/trackLayout.css" rel="stylesheet">
@@ -76,7 +79,7 @@
 											<button type="button" class="btn btn-primary right">Download</button>
 								</div>
 								<div class="col-xs-1">
-											<button type="button" class="btn btn-default right">Like</button>
+											<button type="button" class="btn btn-default right likeTrack" value="1">Like</button>
 								</div>
 							</div>
 							<div class="row">
@@ -114,14 +117,13 @@
 			<!--Nav Tabs-->
 				<ul class="nav nav-tabs">
 				  <li class="active"><a href="#replies" data-toggle="tab">Replies</a></li>
-				  <li><a href="#comments" data-toggle="tab">Comments</a></li>
 				</ul>
 				<!--Tab Panes-->
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="replies">
 					<div class="row">
-						<div class="col-xs-2 dropDownSort">
-							<div class="dropdown">
+						<div class="col-xs-4 dropDownSort">
+							<!--<div class="dropdown">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
 								  	Top Rated
 									<span class="caret"></span>
@@ -130,6 +132,12 @@
 										<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Top Rated</a></li>
 										<li role="presentation"><a role="menuitem" tabindex="-1" href="#">New</a></li>
 								  </ul>
+							</div>-->
+							<div class="form-group col-xs-8">
+								<select id="sortDropDown" class="form-control">
+									<option value="top">Top Rated</option>
+									<option value="new">New</option>
+								</select>
 							</div>
 						</div>
 					</div>
@@ -157,7 +165,7 @@
 											</audio>
 										</div>
 										<div class="col-xs-2">
-											<button type="button" class="btn btn-default right">Like</button>
+											<button type="button" class="btn btn-default right likeReply" value="1">Like</button>
 										</div>
 									</div>
 									<div class="row tagSection">
@@ -199,7 +207,7 @@
 											</audio>
 										</div>
 										<div class="col-xs-2">
-											<button type="button" class="btn btn-default right">Like</button>
+											<button type="button" class="btn btn-default right likeReply" value="2">Like</button>
 										</div>
 									</div>
 									<div class="row tagSection">
@@ -218,98 +226,6 @@
 						</div>
 						<!--EndReply-->
 					</div>
-					<div class="tab-pane fade" id="comments">
-						<div class="row">
-							<div class="col-xs-2 dropDownSort">
-								<div class="dropdown">
-									  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">
-										Top Rated
-										<span class="caret"></span>
-									  </button>
-									  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-										<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Top Rated</a></li>
-										<li role="presentation"><a role="menuitem" tabindex="-1" href="#">New</a></li>
-									  </ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12">
-							<div class="row">
-								<div class="center-block" id="commentEditor">
-									<form role="form">
-										<fieldset>
-											<div class="form-group">
-												<textarea placeholder="say something about this track..."
-												maxlength="1000"	
-												class="form-control" rows="4"></textarea>
-											</div>
-											<button type="submit" class="btn btn-primary">Submit</button>
-										</fieldset>
-									</form>
-								</div>
-							</div>
-							<!--begin comment-->
-							<div class="row comment">
-								<div class="col-xs-2 username">
-									<div class="row">
-										<div class="col-xs-12">
-											<img src="profileImages/default.png" height="60" width="80" alt="profilePic"/>
-											<span class="userHead"><a href="#">myUsername</a></span>
-											<p class="timeStamp">Posted <span class="timeSinceComment">5</span> hours ago</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-xs-9">
-									<p>I like this track very much but I think that it could be tweaked a bit. Dont really like how it ends but its not the end of the world. </p>
-								</div>
-								<div class="col-xs-1">
-									<span class="edit actionSpan"> <a href="#">edit</a></span>
-									<span class="delete actionSpan"> <a href="#">delete</a></span>
-								</div>
-							</div>
-							<!--end comment-->
-							<!--begin comment-->
-							<div class="row comment">
-								<div class="col-xs-2 username">
-									<div class="row">
-										<div class="col-xs-12">
-											<img src="profileImages/default.png" height="60" width="80" alt="profilePic"/>
-											<span class="userHead"><a href="#">Username</a></span>
-											<p class="timeStamp">Posted <span class="timeSinceComment">5</span> hours ago</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-xs-9">
-									<p>Eh...subpar at best.</p>
-								</div>
-								<div class="col-xs-1">
-									<span class="reply actionSpan"> <a href="#">reply</a></span>
-									<button type="button" class="btn btn-default right spacing">like</button>
-								</div>
-							</div>
-							<!--end comment-->
-							<!--begin comment-->
-							<div class="row comment">
-								<div class="col-xs-2 username">
-									<div class="row">
-										<div class="col-xs-12">
-											<img src="profileImages/default.png" height="60" width="80" alt="profilePic"/>
-											<span class="userHead"><a href="#">Username</a></span>
-											<p class="timeStamp">Posted <span class="timeSinceComment">5</span> hours ago</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-xs-9">
-									<p>Nice!</p>
-								</div>
-								<div class="col-xs-1">
-									<span class="reply actionSpan"> <a href="#">reply</a></span>
-									<button type="button" class="btn btn-default right spacing">like</button>
-								</div>
-							</div>
-							<!--end comment-->
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -319,8 +235,6 @@
 
   <!-- This is here at the bottom so that we can load parts of the page before we load the js file, which makes the website run a little faster -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="raty-2.7.0/lib/jquery.raty.js"></script>
-	<script src="js/track.js"></script>
 
 
     <!--************* begin footer ****************-->
