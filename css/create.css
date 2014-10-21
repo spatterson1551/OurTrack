@@ -14,14 +14,15 @@
 #trackuploadbutton, #progressBar, #audioGlyph, #audioCancelGlyph, 
 #imageUploadButton, #imageProgressBar, #imageGlyph, #imageCancelGlyph {
 	visibility: hidden;
+	margin-left: .2em;
 }
 
 .fileSelector {
 	background: white;
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	height: 2.5em;
-	padding: .2em;
+	height: 3.2em;
+	padding: .3em;
 }
 
 .upload {

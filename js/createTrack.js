@@ -2,9 +2,11 @@ $(document).ready( function () {
 	var goodTitle = false;
 	var goodDescription = false;
 	var goodCategory = false;
+	goodTrack = false;
+	goodImage = false;
 	audioDivEnabled = true;
 	imageDivEnabled = true;
-	//goodTrack and goodImage will be set correctly below
+
 
 	$("#title").blur( function(event) {
 		if ($(this).val()) {   //the value isnt empty so there is some text NOTE: $(this) refers to the element which the event listener is attache to, i.e ("#title")
@@ -75,15 +77,18 @@ $(document).ready( function () {
 
 	$("#submit").click( function(event) {
 
-		if (goodTitle && goodDescription && goodCategory) {
+		if (goodTitle && goodDescription && goodCategory && goodTrack && goodImage) {
 			//get all the tags
-			var tagArray = [];
+			var tagString = '';
 			$("#tagSection").find('.tag').each( function(event) {
-				tagArray.push($.trim($(this).text()));
+				tagString = tagString + $.trim($(this).text()) + ",";
 			})
 			
-			event.preventDefault();
-			alert("submit Successful");
+			//build a new form input to assign tags so they are also submitted to the server
+			var input = $("<input>").attr('id', 'allTags').attr('type', 'hidden').attr('name', 'allTags').val(tagString);
+			$("#createForm").append($(input));
+
+			//submit will run successfully. 
 		} else {
 			event.preventDefault();
 			//show red for errors.
@@ -95,6 +100,12 @@ $(document).ready( function () {
 			}
 			if (!goodCategory) {
 				$("#category").parent().addClass('has-error');
+			}
+			if (!goodTrack) {
+				$("#audioSelector").css('border', '1px solid #b9484a');
+			}
+			if (!goodImage) {
+				$("#imageSelector").css('border', '1px solid #b9484a');
 			}
 			$('html, body').animate({ scrollTop: 0 }, "slow");
 		}
@@ -152,7 +163,8 @@ function audioCompleteHandler(event){
 	audioDivEnabled = false;
 }
 function audioErrorHandler(event){
-	_("status").innerHTML = "Upload Failed";
+	goodTrack = false
+	_("status").innerHTML = "Upload Failed. Try Again or Select New File.";
 	$("#audioGlyph").css("visibility", "visible");
 	$("#audioGlyph").css("color", "red");
 	$("#audioGlyph").attr("class", "glyphicon glyphicon-exclamation-sign");
@@ -177,6 +189,7 @@ $(function() {
 	$("#audioSelector").click(function(event) {
 		if(audioDivEnabled)
 		{
+			$(this).css('border', '1px solid #ccc');
 			$(this).siblings('#trackupload').click();
 		}
 	});
@@ -190,6 +203,7 @@ $(function() {
 //resets file upload field
 function reset(){
 	audioDivEnabled = true;
+	goodTrack = false;
 	_("progressBar").value = 0;
 	$("#audioText").html("Click anywhere to select a file");
 	 $("#trackuploadbutton").css("visibility", "hidden");
@@ -244,7 +258,8 @@ function imageCompleteHandler(event){
 	imageDivEnabled = false;
 }
 function imageErrorHandler(event){
-	_("imageStatus").innerHTML = "Upload Failed";
+	goodImage = false;
+	_("imageStatus").innerHTML = "Upload Failed. Try Again or Select New File.";
 	$("#imageGlyph").css("visibility", "visible");
 	$("#imageGlyph").css("color", "red");
 	$("#imageGlyph").attr("class", "glyphicon glyphicon-exclamation-sign");
@@ -269,6 +284,7 @@ $(function() {
 	$("#imageSelector").click(function(event) {
 		if(imageDivEnabled)
 		{
+			$(this).css('border', '1px solid #ccc');
 			$(this).siblings('#imageupload').click();
 		}
 	});
@@ -282,6 +298,7 @@ $(function() {
 //resets file upload field
 function imageReset(){
 	imageDivEnabled = true;
+	goodImage = false;
 	_("imageProgressBar").value = 0;
 	$("#imageText").html("Click anywhere to select a file");
 	 $("#imageUploadButton").css("visibility", "hidden");
