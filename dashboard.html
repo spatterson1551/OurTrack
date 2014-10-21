@@ -4,6 +4,7 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="bootstrap/jquery/jquery-2.0.3.js"></script>
     <script src="js/editBio.js"></script>
+    <script src="js/editPicture.js"></script>
   	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/mainLayout.css" rel="stylesheet">
     <link href="css/profile.css" rel="stylesheet">
@@ -53,8 +54,14 @@
     <div class="container" style="margin-top: 2.857em;">
       <div class="col-xs-9" style="margin-bottom: 5.714em;">
         <div class="col-xs-12" style="height: 10.714em; padding-left: 1.786em; margin-bottom: 2.857em;">
-          <div class="col-xs-3" style="padding:0em;">
-            <img src="profileImages/default.png" alt="profile picture">
+          <div class="col-xs-3" style="padding:0em;" id="profilePictureContainer">
+            <img id="profilePicture" src="profileImages/default.png" alt="profile picture">
+            <form method="POST" action="" accept-charset="UTF-8" id="pictureForm" enctype="multipart/form-data">
+              <input type="file" name="picture" style="visibility:hidden" id="fileDialog">
+            </form>
+            <div class="col-xs-12" id="editPicture" style="position:absolute;top:0;left:0;padding:4px;background:rgba(255, 255, 255, .3);height:16%;width:13%;font-size:16px;"> 
+              <span class="glyphicon glyphicon-pencil"></span>
+            </div>
           </div>
           <div class="col-xs-9">
             <h3 style="margin: 0em;"> Your Feed </h3>
