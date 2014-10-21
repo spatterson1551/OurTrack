@@ -26,7 +26,7 @@ $(document).ready(function() {
             processData: false,
             data: form_data,                         // Setting the data attribute of ajax with file_data
             type: 'post',
-            success: function(data) {    //wont work until we get the backend going
+            success: function(data) {    //wont work until we get the backend going which saves the file and returns its path
             	$("#profilePicture").attr('src', data);
             }
       	});
