@@ -2,11 +2,12 @@ $(document).ready(function() {
 
 	$("#saveBio").click(function() {
 		data = {
-			bio: $("#bioContent").val(),
+			bio: $("#bioContent").text(),
 		}
+
 		$.ajax({
 			type: 'POST',
-			url: 'some php script in the future', 
+			url: 'dummyPHP.php', 
 			data: data,
 			success: function(data) { //event wont be called until back end in place, then the modal will be hid and the bio updated automatically.
 				$("#userBio").html(data);

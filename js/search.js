@@ -15,7 +15,7 @@ $(document).ready( function () {
 
 		$.ajax({
 			type: 'POST',
-			url: 'some php script in the future', //script that will return new tracks based on new selected category
+			url: 'dummyPHP.php', //script that will return new tracks based on new selected category
 			data: data,
 			success: function(data) { //event wont work until back end in place, then it will return all the tracks based on category
 				//output results from server

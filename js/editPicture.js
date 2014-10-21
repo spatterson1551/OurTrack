@@ -20,7 +20,7 @@ $(document).ready(function() {
 		form_data.append("file", file_data)              // Appending parameter named file with properties of file_field to form_data
 		form_data.append("_token", $("input[name='_token']").val())                 // Adding extra parameters to form_data
 		$.ajax({
-            url: "php script in the future",
+            url: "dummyPHP.php",
             cache: false,
             contentType: false,
             processData: false,

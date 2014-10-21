@@ -7,7 +7,7 @@ $(document).ready( function(event) {
 
 		$.ajax({
 			type: 'POST',
-			url: 'some php script in the future', 
+			url: 'dummyPHP.php', 
 			data: data,
 			success: function(data) { //event wont work until back end in place, then the number of likes will also be incremented
 				$(this).html('You like this');
