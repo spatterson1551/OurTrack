@@ -191,11 +191,20 @@ $("#userName").keyup(function(){
 $("#submit").click(function(event){
 	if(doesMatch && isEmail && isUsername)
 	{
-		alert("sign up successful");
+		alert("sign up successful"); //this will be removed once back end is in place
 	}
 	else
 	{
 		event.preventDefault();
-		alert("something is wrong");
+		if (!isEmail) {
+			$("#email").parent().addClass('has-error');
+		} 
+		if (!isUsername) {
+			$("#userName").parent().addClass('has-error');
+		}
+		if (!doesMatch) {
+			$("#firstPass").parent().addClass('has-error');
+			$("#secondPass").parent().addClass('has-error');
+		}
 	}
 });

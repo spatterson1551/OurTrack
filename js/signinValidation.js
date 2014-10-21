@@ -72,11 +72,16 @@ $("#pass").keyup(function(){
 $("#submit").click(function(event){
 	if(isEmail && isPass)
 	{
-		alert("sign up successful");
+		alert("sign up successful"); //this will be removed in the future once the backend is there
 	}
 	else
 	{
 		event.preventDefault();
-		alert("something is wrong");
+		if (!isEmail) {
+			$("#email").parent().addClass('has-error');
+		} 
+		if (!isPass) {
+			$("#pass").parent().addClass('has-error');
+		}
 	}
 });
