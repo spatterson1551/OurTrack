@@ -38,152 +38,152 @@ $("#email").keyup(function(event){
 	}
 });
 
-$("#secondPass").keyup(function(){
-	if($("#firstPass").val()!="")//if there is a value for the first password
+$("#secondpass").keyup(function(){
+	if($("#firstpass").val()!="")//if there is a value for the first password
 	{
-		if($("#secondPass").val()==$("#firstPass").val())//if the passwords match then success
+		if($("#secondpass").val()==$("#firstpass").val())//if the passwords match then success
 		{
-			$("#secondPass").parent().removeClass("has-warning");
-			$("#secondPass").parent().removeClass("has-error");
-			$("#secondPass").parent().addClass("has-success");
+			$("#secondpass").parent().removeClass("has-warning");
+			$("#secondpass").parent().removeClass("has-error");
+			$("#secondpass").parent().addClass("has-success");
 			
-			$("#firstPass").parent().removeClass("has-warning");
-			$("#firstPass").parent().removeClass("has-error");
-			$("#firstPass").parent().addClass("has-success");
+			$("#firstpass").parent().removeClass("has-warning");
+			$("#firstpass").parent().removeClass("has-error");
+			$("#firstpass").parent().addClass("has-success");
 			doesMatch = true;
 		}
 		else
 		{
-			$("#secondPass").parent().removeClass("has-error");
-			$("#secondPass").parent().removeClass("has-success");
-			$("#secondPass").parent().addClass("has-warning");
+			$("#secondpass").parent().removeClass("has-error");
+			$("#secondpass").parent().removeClass("has-success");
+			$("#secondpass").parent().addClass("has-warning");
 			
-			$("#firstPass").parent().removeClass("has-error");
-			$("#firstPass").parent().removeClass("has-success");
-			$("#firstPass").parent().addClass("has-warning");
+			$("#firstpass").parent().removeClass("has-error");
+			$("#firstpass").parent().removeClass("has-success");
+			$("#firstpass").parent().addClass("has-warning");
 			doesMatch = false;
 		}
 	}
-	if($("#firstPass").val()==""&&$("#secondPass").val()=="")
+	if($("#firstpass").val() == "" && $("#secondpass").val() == "")
 	{
-		$("#firstPass").parent().removeClass("has-error");
-		$("#firstPass").parent().removeClass("has-success");
-		$("#firstPass").parent().removeClass("has-warning");
+		$("#firstpass").parent().removeClass("has-error");
+		$("#firstpass").parent().removeClass("has-success");
+		$("#firstpass").parent().removeClass("has-warning");
 		
-		$("#secondPass").parent().removeClass("has-error");
-		$("#secondPass").parent().removeClass("has-success");
-		$("#secondPass").parent().removeClass("has-warning");
+		$("#secondpass").parent().removeClass("has-error");
+		$("#secondpass").parent().removeClass("has-success");
+		$("#secondpass").parent().removeClass("has-warning");
 		doesMatch = false;
 	}
 }).blur(function(){
-	if($("#firstPass").val()!="")//if there is a value for the first password
+	if($("#firstpass").val()!="")//if there is a value for the first password
 	{
-		if($("#secondPass").val()==$("#firstPass").val())//if the passwords match then success
+		if($("#secondpass").val()==$("#firstpass").val())//if the passwords match then success
 		{
-			$("#secondPass").parent().removeClass("has-warning");
-			$("#secondPass").parent().removeClass("has-error");
-			$("#secondPass").parent().addClass("has-success");
+			$("#secondpass").parent().removeClass("has-warning");
+			$("#secondpass").parent().removeClass("has-error");
+			$("#secondpass").parent().addClass("has-success");
 			
-			$("#firstPass").parent().removeClass("has-warning");
-			$("#firstPass").parent().removeClass("has-error");
-			$("#firstPass").parent().addClass("has-success");
+			$("#firstpass").parent().removeClass("has-warning");
+			$("#firstpass").parent().removeClass("has-error");
+			$("#firstpass").parent().addClass("has-success");
 			doesMatch = true;
 		}
 		else
 		{
-			$("#secondPass").parent().removeClass("has-success");
-			$("#secondPass").parent().removeClass("has-warning");
-			$("#secondPass").parent().addClass("has-error");
+			$("#secondpass").parent().removeClass("has-success");
+			$("#secondpass").parent().removeClass("has-warning");
+			$("#secondpass").parent().addClass("has-error");
 			
-			$("#firstPass").parent().removeClass("has-warning");
-			$("#firstPass").parent().removeClass("has-success");
-			$("#firstPass").parent().addClass("has-error");
+			$("#firstpass").parent().removeClass("has-warning");
+			$("#firstpass").parent().removeClass("has-success");
+			$("#firstpass").parent().addClass("has-error");
 			doesMatch = false;
 		}
 	}
 });
 
-$("#firstPass").keyup(function(){
-	if($("#secondPass").val()!="")//if there is a value for the second password
+$("#firstpass").keyup(function(){
+	if($("#secondpass").val()!="")//if there is a value for the second password
 	{
-		if($("#secondPass").val()==$("#firstPass").val())//if the passwords match then success
+		if($("#secondpass").val()==$("#firstpass").val())//if the passwords match then success
 		{
-			$("#secondPass").parent().removeClass("has-warning");
-			$("#secondPass").parent().removeClass("has-error");
-			$("#secondPass").parent().addClass("has-success");
+			$("#secondpass").parent().removeClass("has-warning");
+			$("#secondpass").parent().removeClass("has-error");
+			$("#secondpass").parent().addClass("has-success");
 			
-			$("#firstPass").parent().removeClass("has-warning");
-			$("#firstPass").parent().removeClass("has-error");
-			$("#firstPass").parent().addClass("has-success");
+			$("#firstpass").parent().removeClass("has-warning");
+			$("#firstpass").parent().removeClass("has-error");
+			$("#firstpass").parent().addClass("has-success");
 			doesMatch = true;
 		}
 		else
 		{
-			$("#secondPass").parent().removeClass("has-error");
-			$("#secondPass").parent().removeClass("has-success");
-			$("#secondPass").parent().addClass("has-warning");
+			$("#secondpass").parent().removeClass("has-error");
+			$("#secondpass").parent().removeClass("has-success");
+			$("#secondpass").parent().addClass("has-warning");
 			
-			$("#firstPass").parent().removeClass("has-error");
-			$("#firstPass").parent().removeClass("has-success");
-			$("#firstPass").parent().addClass("has-warning");
+			$("#firstpass").parent().removeClass("has-error");
+			$("#firstpass").parent().removeClass("has-success");
+			$("#firstpass").parent().addClass("has-warning");
 			doesMatch = false;
 		}
 	}
 }).blur(function(){
-	if($("#secondPass").val()!="")//if there is a value for the second password
+	if($("#secondpass").val()!="")//if there is a value for the second password
 	{
-		if($("#secondPass").val()==$("#firstPass").val())//if the passwords match then success
+		if($("#secondpass").val()==$("#firstpass").val())//if the passwords match then success
 		{
-			$("#secondPass").parent().removeClass("has-warning");
-			$("#secondPass").parent().removeClass("has-error");
-			$("#secondPass").parent().addClass("has-success");
+			$("#secondpass").parent().removeClass("has-warning");
+			$("#secondpass").parent().removeClass("has-error");
+			$("#secondpass").parent().addClass("has-success");
 			
-			$("#firstPass").parent().removeClass("has-warning");
-			$("#firstPass").parent().removeClass("has-error");
-			$("#firstPass").parent().addClass("has-success");
+			$("#firstpass").parent().removeClass("has-warning");
+			$("#firstpass").parent().removeClass("has-error");
+			$("#firstpass").parent().addClass("has-success");
 			doesMatch = true;
 		}
 		else
 		{
-			$("#secondPass").parent().removeClass("has-success");
-			$("#secondPass").parent().removeClass("has-warning");
-			$("#secondPass").parent().addClass("has-error");
+			$("#secondpass").parent().removeClass("has-success");
+			$("#secondpass").parent().removeClass("has-warning");
+			$("#secondpass").parent().addClass("has-error");
 			
-			$("#firstPass").parent().removeClass("has-warning");
-			$("#firstPass").parent().removeClass("has-success");
-			$("#firstPass").parent().addClass("has-error");
+			$("#firstpass").parent().removeClass("has-warning");
+			$("#firstpass").parent().removeClass("has-success");
+			$("#firstpass").parent().addClass("has-error");
 			doesMatch = false;
 		}
 	}
 });
 
-$("#userName").keyup(function(){
-	if($("#userName").val())
+$("#username").keyup(function(){
+	if($("#username").val())
 	{
-		$("#userName").parent().removeClass("has-warning");
-		$("#userName").parent().removeClass("has-error");
-		$("#userName").parent().addClass("has-success");
+		$("#username").parent().removeClass("has-warning");
+		$("#username").parent().removeClass("has-error");
+		$("#username").parent().addClass("has-success");
 		isUsername = true;
 	}
 	else
 	{
-		$("#userName").parent().removeClass("has-error");
-		$("#userName").parent().removeClass("has-success");
-		$("#userName").parent().addClass("has-warning");
+		$("#username").parent().removeClass("has-error");
+		$("#username").parent().removeClass("has-success");
+		$("#username").parent().addClass("has-warning");
 	}
 }).blur(function(){
-	if($("#userName").val())
+	if($("#username").val())
 	{
-		$("#userName").parent().removeClass("has-warning");
-		$("#userName").parent().removeClass("has-error");
-		$("#userName").parent().addClass("has-success");
+		$("#username").parent().removeClass("has-warning");
+		$("#username").parent().removeClass("has-error");
+		$("#username").parent().addClass("has-success");
 		isUsername = true;
 	}
 	else
 	{
-		$("#userName").parent().removeClass("has-warning");
+		$("#username").parent().removeClass("has-warning");
 		$("#userName").parent().removeClass("has-success");
-		$("#userName").parent().addClass("has-error");
+		$("#username").parent().addClass("has-error");
 	}
 });
 
@@ -200,11 +200,11 @@ $("#submit").click(function(event){
 			$("#email").parent().addClass('has-error');
 		} 
 		if (!isUsername) {
-			$("#userName").parent().addClass('has-error');
+			$("#username").parent().addClass('has-error');
 		}
 		if (!doesMatch) {
-			$("#firstPass").parent().addClass('has-error');
-			$("#secondPass").parent().addClass('has-error');
+			$("#firstpass").parent().addClass('has-error');
+			$("#secondpass").parent().addClass('has-error');
 		}
 	}
 });

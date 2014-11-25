@@ -1,3 +1,10 @@
+<?php
+
+require_once('core/init.php');
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,41 +16,7 @@
 </head>
 <body>
   <!--************* begin header ****************-->
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	  <div class="container">
-      <div class="navbar-header">
-      	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
-      	  <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-      	  <span class="icon-bar"></span>
-      	  <span class="icon-bar"></span>
-    	</button>
-        <a class="navbar-brand" href="home.html"><strong>OurTrack</strong></a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-      	  <li><a href="about.html">About</a></li>   <!-- class = "active" to highlight -->
-          <li><a href="create.html"> Create Track</a></li>
-      	</ul>
-        <ul class="nav navbar-nav">
-          <li><div id="spacer"></div></li>
-        </ul>
-      	<form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">
-              <span class="glyphicon glyphicon-search"></span>
-            </button>
-          </form>
-      	<ul class="nav navbar-nav navbar-right">
-      	   <li><a href="signup.html"> Sign Up </a></li>
-           <li><a href="login.html"> Log In </a></li>
-      	</ul>
-      </div>
-    </div>
-  </nav>
+	<?php include 'includes/header.php' ?>
   <!--************* end header ****************-->
 	
   <!--************* begin content area ****************-->
@@ -54,7 +27,7 @@
         project with the help of other talented musicians and recording artists in the community. Post unfinished projects to receive replies
         from other users, augmented with their own additions to the recording, or post finished tracks to recieve awesome remixes in no time
         at all</p>
-      <p><a class="btn btn-primary btn-lg" role="button">Get Started &raquo;</a></p>
+      <p><a class="btn btn-primary btn-lg" role="button" href="signup.php">Get Started &raquo;</a></p>
     </div>
   </div>
 
@@ -90,21 +63,8 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
 
-    <!--************* begin footer ****************-->
-		<div id="footer">
-			<div id="footerDiv" class="container-fluid">
-				<div class="container">
-					<div class="row">
-					</div>
-				</div>
-			</div>
-			
-			<!-- begin copyright -->
-			<div id="copyright" class="container-fluid">
-				<p> Copyright &copy; 2014, OurTrack </p>
-			</div>
-			<!-- end copyright -->
-		</div>
+  <!--************* begin footer ****************-->
+	<?php include 'includes/footer.php' ?>
 	<!--************* end footer ****************-->
 </body>
 </html>

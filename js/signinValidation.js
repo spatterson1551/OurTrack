@@ -72,7 +72,7 @@ $("#pass").keyup(function(){
 $("#submit").click(function(event){
 	if(isEmail && isPass)
 	{
-		alert("sign up successful"); //this will be removed in the future once the backend is there
+		//good to go.
 	}
 	else
 	{
