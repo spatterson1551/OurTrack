@@ -48,10 +48,9 @@ class Track {
 	}
 
 	public function displayFull() {
-		//get all stuff from the database
-		//include a file for it
-		//put all the html in there, with the php output sprinkled in, you can look at the above one for reference,
-		//because its basically the same thing except different html formatting.
+		$owner = new User($this->owner_id);
+		$tags = Database::getInstance()->fetchToClass("SELECT * FROM tags WHERE `id` IN (SELECT `tag_id` FROM tagmaps WHERE `track_id`=".$this->id.")", "Tag");
+		include 'includes/trackFull.php';
 	}
 }
 

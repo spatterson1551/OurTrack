@@ -8,7 +8,7 @@ $GLOBALS['config'] = array(
 		'host' => '127.0.0.1',
 		'user' => 'root',
 		'pass' => 'root',
-		'dbname' => 'OurTrack'
+		'dbname' => 'test'
 	),
 	'remember' => array( 
 		'cookie_name' => 'hash',

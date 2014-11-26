@@ -2,7 +2,7 @@
 
 require_once('core/init.php');
 
-
+$id = $_GET['id'];
 
 ?>
 
@@ -26,66 +26,14 @@ require_once('core/init.php');
   <!--************* end header ****************-->
 	
   <!--************* begin content area ****************-->
+  <?php 
+  		$track = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id`='".escape($id)."'", "Track");
+
+  ?>
 	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<div id="trackHead">
-					<div class="row">
-						<div class="col-xs-3 tCenter">
-							<img src="images/ajeif45s843l.jpg" height="200" alt="mainTrackImg"/>
-						</div>
-						<div class="col-xs-7">
-							<div class="row topTrackInfo">
-								<div class="col-xs-12">
-									<h2><a href="track.html" class="trackTitle">Track Title</a>
-										by <a href="profile.html" class="trackOwner">John Smith</a>
-									</h2>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-9">
-									<audio class="topAudioPlayer" controls="controls">
-											<source src="tracks/.mp3" type="audio/mpeg" />
-												Update your browser to play audio
-									</audio>
-								</div>
-								<div class="col-xs-1 col-xs-offset-1">
-											<button type="button" class="btn btn-primary right">Download</button>
-								</div>
-								<div class="col-xs-1">
-											<button type="button" class="btn btn-default right likeTrack" value="1">Like</button>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<div class="row">
-										<div class="col-xs-4">
-											<div style="text-align:center" class="raty"></div>
-										</div>
-										<div class="col-xs-3">
-											<div class="tag">tag 1</div>
-											<div class="tag">tag 2</div>
-											<div class="tag">tag 3</div>
-											<div class="tag">tag 4</div>
-											<div class="tag">tag 5</div>
-											<div class="tag">tag 6</div>
-										</div>
-										<div class="col-xs-3">
-											<h4><span>87</span> likes</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12 center-block" style="margin-top: 30px;">
-									<p>Aenean venenatis quam a ipsum hendrerit fringilla. Pellentesque posuere, lectus eget lobortis bibendum, nunc odio maximus nisl, vitae ultricies erat lectus at neque. Quisque velit diam, fermentum non ex sit amet, eleifend ultricies lectus. Etiam facilisis sollicitudin lacus at condimentum.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!--Top Track Start-->
+			<?php echo $track[0]->displayFull(); ?>
+		<!--Top Track End-->
 		<div class="row" style="margin-top: 60px;">
 			<div class="col-xs-9">
 			<!--Nav Tabs-->
