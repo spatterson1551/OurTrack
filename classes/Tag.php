@@ -6,7 +6,7 @@ class Tag {
 	public $name;
 
 	public function __toString() {
-		echo '<div class="tag">'.$this->name.'</div>';
+		return '<div class="tag">'.$this->name.'</div>';
 	}
 }
 

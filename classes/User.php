@@ -2,6 +2,7 @@
 
 class User {
 
+	public $id;
 	public $username;
 	public $email;
 	public $password;
@@ -11,7 +12,7 @@ class User {
 	public $url;
 
 	private $db;
-	private $data;
+	//private $data;
 	private $sessionName;
 	private $loggedIn;
 
@@ -46,7 +47,8 @@ class User {
 			$data = $this->db->get('users', array($field, '=', $user));
 
 			if ($data->count()) {
-				$this->data = $data->first();
+				//$this->data = $data->first();
+				$this->id = $data->first()->id;
 				$this->username = $data->first()->username;
 				$this->email = $data->first()->email;
 				$this->password = $data->first()->password;
@@ -64,8 +66,8 @@ class User {
 		$user = $this->find($email);
 
 		if ($user) {
-			if ($this->data->password === Hash::make($password, $this->data->salt)) {
-				Session::put($this->sessionName, $this->data->id);
+			if ($this->password === Hash::make($password, $this->salt)) {
+				Session::put($this->sessionName, $this->id);
 
 				if ($remember) {
 
@@ -87,9 +89,9 @@ class User {
 		return $this->loggedIn;
 	}
 
-	public function data() {
-		return $this->data;
-	}
+	// public function data() {
+	// 	return $this->data;
+	// }
 
 
 }

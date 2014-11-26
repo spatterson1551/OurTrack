@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 	$("#saveBio").click(function() {
+
 		data = {
 			bio: $("#bioContent").text(),
 		}

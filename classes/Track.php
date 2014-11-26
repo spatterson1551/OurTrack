@@ -6,6 +6,7 @@ class Track {
 
 	public $owner_id;
 	public $picture;
+	public $source;
 	public $title;
 	public $description;
 	public $genre;
@@ -25,6 +26,7 @@ class Track {
 				$this->owner_id = $data->first()->owner_id;
 				$this->title = $data->first()->title;
 				$this->picture = $data->first()->picture;
+				$this->source = $data->first()->source;
 				$this->description = $data->first()->description;
 				$this->genre = $data->first()->genre;
 				$this->likes = $data->first()->likes;
@@ -40,11 +42,16 @@ class Track {
 	}
 
 	public function displayMini() {
-
+		$owner = new User($this->owner_id);
+		$tags = Database::getInstance()->fetchToClass("SELECT * FROM tags WHERE `id` IN (SELECT `tag_id` FROM tagmaps WHERE `track_id`=".$this->id.")", "Tag");
+		include 'includes/trackMini.php';
 	}
 
 	public function displayFull() {
-
+		//get all stuff from the database
+		//include a file for it
+		//put all the html in there, with the php output sprinkled in, you can look at the above one for reference,
+		//because its basically the same thing except different html formatting.
 	}
 
 }

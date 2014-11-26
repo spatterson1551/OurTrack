@@ -17,6 +17,10 @@ $GLOBALS['config'] = array(
 	'session' => array(
 		'session_name' => 'user',
 		'token_name' => 'token'
+	),
+	'genres' => array(
+		'Alternative', 'Blues', 'Classical', 'Country', 'Disco', 'Drum and Bass', 'Dubstep', 'Electronic', 'Folk', 'Hardcore', 'Hip Hop', 'House', 'Indie',
+		'Jazz', 'Latin', 'Metal', 'Minimal', 'Other', 'Piano', 'Pop', 'Progressive', 'Punk', 'R&B', 'Rap', 'Raggae', 'Rock', 'Soul', 'Techno', 'Trap', 'World'
 	)
 );
 

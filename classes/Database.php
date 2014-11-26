@@ -28,10 +28,6 @@ class Database {
 	}
 
 	public function fetchToClass($sql, $class) {
-		// if ($class == "Tag") {
-		// 	var_dump($sql);
-		// 	die();
-		// }
 		$this->query = $this->pdo->query($sql);
 
 		if ($this->query->execute()) {
@@ -120,7 +116,7 @@ class Database {
 			$count = 1;
 
 			foreach ($fields as $key => $value) {
-				$set .= "{$name} = ?";
+				$set .= "{$key} = ?";
 				if ($count < count($fields)) {
 					$set .= ", ";
 				}
@@ -128,6 +124,8 @@ class Database {
 			}
 
 			$sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
+
+			error_log($sql);
 
 			if (!$this->query($sql, $fields)->error()) {
 				return true;

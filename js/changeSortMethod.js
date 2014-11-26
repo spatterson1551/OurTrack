@@ -10,7 +10,7 @@ $(document).ready( function() {
 
 		$.ajax({
 			type: 'POST',
-			url: 'dummyPHP.php', 
+			url: '', 
 			data: data,
 			success: function(data) { //event wont work until back end in place, then it will return replies in correct ordering
 				//output the returned replies

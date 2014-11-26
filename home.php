@@ -2,7 +2,20 @@
 
 require_once('core/init.php');
 
-$tracks = Database::getInstance()->rawQuery()
+if (Input::exists('get')) {
+  $genre = Input::get('genre');
+
+  if (in_array($genre, $GLOBALS['config']['genres'])) {
+    //good genre value, so retrieve its stuff from the database.
+    $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `genre`='".escape($genre)."'", "Track");
+  } else if ($genre === 'all' || $genre === 'All') {
+    $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks", "Track");
+  } else {
+    Redirect::to(404);
+  }
+} else {
+  $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks", "Track");
+}
 
 ?>
 
@@ -33,99 +46,14 @@ $tracks = Database::getInstance()->rawQuery()
           <h4> Categories: </h4>
         </div>
         <div id="categoryBox" class="col-xs-12">
-          <div id="categorySelected" class="categoryListItem">
-            All
-          </div>
-          <div class="categoryListItem">
-            Alternative
-          </div>
-          <div class="categoryListItem">
-            Blues
-          </div>
-          <div class="categoryListItem">
-            Classical
-          </div>
-          <div class="categoryListItem">
-            Country
-          </div>
-          <div class="categoryListItem">
-            Disco
-          </div>
-          <div class="categoryListItem">
-            Drum and Bass
-          </div>
-          <div class="categoryListItem">
-            Dubstep
-          </div>
-          <div class="categoryListItem">
-            Electronic
-          </div>
-          <div class="categoryListItem">
-            Folk
-          </div>
-          <div class="categoryListItem">
-            Hardcore
-          </div>
-          <div class="categoryListItem">
-            Hip Hop
-          </div>
-          <div class="categoryListItem">
-            House
-          </div>
-          <div class="categoryListItem">
-            Indie
-          </div>
-          <div class="categoryListItem">
-            Jazz
-          </div>
-          <div class="categoryListItem">
-            Latin
-          </div>
-          <div class="categoryListItem">
-            Metal
-          </div>
-          <div class="categoryListItem">
-            Minimal
-          </div>
-          <div class="categoryListItem">
-            Other
-          </div>
-          <div class="categoryListItem">
-            Piano
-          </div>
-          <div class="categoryListItem">
-            Pop
-          </div>
-          <div class="categoryListItem">
-            Progressive
-          </div>
-          <div class="categoryListItem">
-            Punk
-          </div>
-          <div class="categoryListItem">
-            R and B
-          </div>
-          <div class="categoryListItem">
-            Rap
-          </div>
-          <div class="categoryListItem">
-            Reggae
-          </div>
-          <div class="categoryListItem">
-            Rock
-          </div>
-          <div class="categoryListItem">
-            Soul
-          </div>
-          <div class="categoryListItem">
-            Techno
-          </div>
-          <div class="categoryListItem">
-            Trap
-          </div>
-          <div class="categoryListItem">
-            World
-          </div>
+          <div id="categorySelected" class="categoryListItem">All</div>
+          <?php 
+            foreach ($GLOBALS['config']['genres'] as $genre) {
+              echo '<div class="categoryListItem">';
+              echo $genre;
+              echo '</div>';
+            }
+          ?>
         </div>
       </div>
       <div class="col-xs-9">
@@ -142,128 +70,15 @@ $tracks = Database::getInstance()->rawQuery()
             </div>
           </div>
         </div>
-      <!-- the following is the container for the size of ONE track in its "list view", i.e. the way itll show them when browsing on pages" -->
-        <div class="col-xs-12 trackListElement">
-          <div class="row">
-            <div class="col-xs-2 trackThumb">
-              <img src="images/ajeif45s843l.jpg" width="120" height="120"  alt="Track Thumb"/>
-            </div>
-            <div class="col-xs-10">
-              <div class="row">
-                <div class="col-xs-6">
-                  <p><a href="track.html" class="trackTitle">Track Title</a>
-                  by <a href="profile.html" class="trackOwner">Owner</a></p>
-                </div>
-                <div class="col-xs-2 col-xs-offset-4">
-                  <p style="float:right"><span class="numLikes">24</span> likes</p>
-                </div>
-              </div>
-              <div class="row audioSection">
-                <div class="col-xs-10">
-                  <audio class="audioPlayer" controls="controls">
-                  <source src="tracks/.mp3" type="audio/mpeg" />
-                    Update your browser to play audio
-                  </audio>
-                </div>
-                <div class="col-xs-2">
-                  <button type="button" class="btn btn-default right likeTrack" value="1">Like</button>
-                </div>
-              </div>
-              <div class="tagSection">
-                <div class="tag">
-                  tag 1
-                </div>
-                <div class="tag">
-                  tag 2
-                </div>
-                <div class="trackCatDate">
-                  <span>posted in <a href="#">Category</a><span class="daysSincePost"> 5</span> days ago</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <!-- end track container here, the following are just duplicates so you get the idea-->
-        <div class="col-xs-12 trackListElement">
-          <div class="row">
-            <div class="col-xs-2 trackThumb">
-              <img src="images/ajeif45s843l.jpg" width="120" height="120"  alt="Track Thumb"/>
-            </div>
-            <div class="col-xs-10">
-              <div class="row">
-                <div class="col-xs-6">
-                  <p><a href="track.html" class="trackTitle">Track Title</a>
-                  by <a href="profile.html" class="trackOwner">Owner</a></p>
-                </div>
-                <div class="col-xs-2 col-xs-offset-4">
-                  <p style="float:right"><span class="numLikes">24</span> likes</p>
-                </div>
-              </div>
-              <div class="row audioSection">
-                <div class="col-xs-10">
-                  <audio class="audioPlayer" controls="controls">
-                  <source src="tracks/.mp3" type="audio/mpeg" />
-                    Update your browser to play audio
-                  </audio>
-                </div>
-                <div class="col-xs-2">
-                  <button type="button" class="btn btn-default right likeTrack" value="2">Like</button>
-                </div>
-              </div>
-              <div class="tagSection">
-                <div class="tag">
-                  tag 1
-                </div>
-                <div class="tag">
-                  tag 2
-                </div>
-                <div class="trackCatDate">
-                  <span>posted in <a href="#">Category</a><span class="daysSincePost"> 5</span> days ago</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 trackListElement">
-          <div class="row">
-            <div class="col-xs-2 trackThumb">
-              <img src="images/ajeif45s843l.jpg" width="120" height="120"  alt="Track Thumb"/>
-            </div>
-            <div class="col-xs-10">
-              <div class="row">
-                <div class="col-xs-6">
-                  <p><a href="track.html" class="trackTitle">Track Title</a>
-                  by <a href="profile.html" class="trackOwner">Owner</a></p>
-                </div>
-                <div class="col-xs-2 col-xs-offset-4">
-                  <p style="float:right"><span class="numLikes">24</span> likes</p>
-                </div>
-              </div>
-              <div class="row audioSection">
-                <div class="col-xs-10">
-                  <audio class="audioPlayer" controls="controls">
-                  <source src="tracks/.mp3" type="audio/mpeg" />
-                    Update your browser to play audio
-                  </audio>
-                </div>
-                <div class="col-xs-2">
-                  <button type="button" class="btn btn-default right likeTrack" value="3">Like</button>
-                </div>
-              </div>
-              <div class="tagSection">
-                <div class="tag">
-                  tag 1
-                </div>
-                <div class="tag">
-                  tag 2
-                </div>
-                <div class="trackCatDate">
-                  <span>posted in <a href="#">Category</a><span class="daysSincePost"> 5</span> days ago</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- start tracks here -->
+      <div id="trackSection">
+       <?php
+        foreach($tracks as $track) {
+          $track->displayMini();
+        }
+       ?>
+      </div>
+      <!-- end tracks here -->
       </div>
     </div>
   </div>

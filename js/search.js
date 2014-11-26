@@ -10,15 +10,15 @@ $(document).ready( function () {
 		selectedGenre = newCategory.text();
 
 		var data = {
-			category: selectedGenre,
+			genre: selectedGenre,
 		}
 
 		$.ajax({
 			type: 'POST',
-			url: 'dummyPHP.php', //script that will return new tracks based on new selected category
+			url: 'changeCategory.php', //script that will return new tracks based on new selected category
 			data: data,
-			success: function(data) { //event wont work until back end in place, then it will return all the tracks based on category
-				//output results from server
+			success: function(data) { 
+				$("#trackSectin").html(data);
 			}
 		})
 	});
