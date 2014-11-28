@@ -15,7 +15,7 @@ class Track {
 
 	private $db;
 
-	private function __construct($id = null) {
+	public function __construct($id = null) {
 
 		$this->db = Database::getInstance();
 
@@ -53,7 +53,6 @@ class Track {
 		//put all the html in there, with the php output sprinkled in, you can look at the above one for reference,
 		//because its basically the same thing except different html formatting.
 	}
-
 }
 
 

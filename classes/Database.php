@@ -11,6 +11,16 @@ class Database {
 	private $results;
 	private $count = 0;
 
+	public function getResults()
+	{
+		return $this->results;
+	}
+
+	public function getCount()
+	{
+		return $this->count;
+	}
+
 	private function __construct() {
 		try {
 			$this->pdo = new PDO('mysql:host=127.0.0.1;dbname=OurTrack', 'root', 'root');
