@@ -4,6 +4,28 @@
   $user = new User();
   if (!$user->isloggedIn()) {
     Redirect::to('login.php');
+  } else {
+    //all tracks the user owns.
+    $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `owner_id`=".$user->id, 'Track');
+    //all tracks the user likes.
+    $likes = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id` IN (SELECT `track_id` FROM likes WHERE `user_id`=".$user->id.")", 'Track');
+    //all tracks the user has left as replies
+    $replies = Database::getInstance()->fetchToClass("SELECT * FROM replies WHERE `owner_id`=".$user->id, 'Track');
+    //all the people that follow the user
+    $followers = Database::getInstance()->query("SELECT `username`, `id` FROM users WHERE `id` IN (SELECT `follower_id` FROM followers WHERE `user_id`=".$user->id.")")->results();
+    //all people the user follows
+    $follows = Database::getInstance()->query("SELECT `username`, `id` FROM users WHERE `id` IN (SELECT `user_id` FROM followers WHERE `follower_id`=".$user->id.")")->results();
+    //get all collaborators
+    $user1results = Database::getInstance()->query("SELECT `user1_id` FROM collaborators WHERE `user2_id`=".$user->id)->results();
+    $user2results = Database::getInstance()->query("SELECT `user2_id` FROM collaborators WHERE `user1_id`=".$user->id)->results();
+    $allIds = array();
+    foreach($user1results as $user1result) {
+      array_push($allIds, $user1result->user1_id);
+    }
+    foreach($user2results as $user2result) {
+      array_push($allIds, $user2result->user2_id);
+    }
+    $collaborators = Database::getInstance()->query("SELECT `username`, `id` FROM users WHERE `id` IN (".implode(',', $allIds).")")->results();
   }
 
 ?>
@@ -31,7 +53,7 @@
       <div class="col-xs-9" style="margin-bottom: 5.714em;">
         <div class="col-xs-12" style="height: 10.714em; padding-left: 1.786em; margin-bottom: 2.857em;">
           <div class="col-xs-3" style="padding:0em;" id="profilePictureContainer">
-            <img id="profilePicture" src="profileImages/default.png" alt="profile picture">
+            <img id="profilePicture" width="200" height="150" src=<?php echo '"profileImages/'.$user->picture.'"'; ?> alt="profile picture">
             <form method="POST" action="#" accept-charset="UTF-8" id="pictureForm" enctype="multipart/form-data">
               <input type="file" name="picture" style="visibility:hidden" id="fileDialog">
             </form>
@@ -41,8 +63,8 @@
           </div>
           <div class="col-xs-9">
             <h3 style="margin: 0em;"> Your Feed </h3>
-            <h4 style="margin: 0em;"> <small> 12 tracks </small> </h4>
-            <h4 style="margin: 0em;"> <small> 100 followers </small> </h4>
+            <h4 style="margin: 0em;"> <small> <?php echo count($tracks) ?> tracks </small> </h4>
+            <h4 style="margin: 0em;"> <small> <?php echo count($followers) ?> followers </small> </h4>
           </div>
         </div>
         <div class="col-xs-12">
@@ -188,7 +210,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-3" id="userBio">
+      <div class="col-xs-3">
         <div class="row">
           <div class="col-xs-12">
             <div class="row">
@@ -200,8 +222,8 @@
               </div>
             </div>
             <div class="row">
-              <p>
-                This is a short bio about the user that will give basic info about that person that the user can edit.
+              <p id="userBio">
+                <?php echo $user->bio ?>
               </p>
             </div>
           </div>
@@ -217,8 +239,13 @@
               </div>
             </div>
             <div class="row">
-              <a href="#">username1</a><br>
-              <a href="#">username2</a><br>
+              <?php 
+                foreach($followers as $follower) {
+                  echo '<a href="profile.php?id='.$follower->id.'">';
+                  echo $follower->username;
+                  echo '</a><br>';
+                }
+              ?>
             </div>
           </div>
         </div>
@@ -233,8 +260,34 @@
               </div>
             </div>
             <div class="row">
-              <a href="#">username1</a> <br>
-              <a href="#">username2</a> <br>
+              <?php 
+                foreach($follows as $follow) {
+                  echo '<a href="profile.php?id='.$follow->id.'">';
+                  echo $follow->username;
+                  echo '</a><br>';
+                }
+              ?>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-6 sideHeader">
+                <h3> <small> COLLABORATORS </small> </h3>
+              </div>
+              <div class="col-xs-6 seeAllButton">
+                <a href="" data-toggle="modal" data-target="#collaboratorsModal">see all</a>
+              </div>
+            </div>
+            <div class="row">
+              <?php 
+                foreach($collaborators as $collaborator) {
+                  echo '<a href="profile.php?id='.$collaborator->id.'">';
+                  echo $collaborator->username;
+                  echo '</a><br>';
+                }
+              ?>
             </div>
           </div>
         </div>
@@ -252,7 +305,7 @@
             <div class="errors">
             </div>
             <div id="bioForm">
-              <textarea class="form-control" id="bioContent" name="bio" cols="50" rows="10"> This is a short bio about the user that will give basic info about that person that the user can edit.
+              <textarea class="form-control" id="bioContent" name="bio" cols="50" rows="10"><?php echo $user->bio ?>
               </textarea>
             </div>
           </div>
@@ -270,8 +323,13 @@
                 <button type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                  <a href="#">username1</a><br>
-                  <a href="#">username2</a><br>
+                  <?php 
+                    foreach($followers as $follower) {
+                      echo '<a href="profile.php?id='.$follower->id.'">';
+                      echo $follower->username;
+                      echo '</a><br>';
+                    }
+                  ?>
                 </div>
           </div>
         </div>
@@ -284,8 +342,32 @@
                 <button type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                  <a href="#">username1</a><br>
-                  <a href="#">username2</a><br>
+                  <?php 
+                    foreach($follows as $follow) {
+                      echo '<a href="profile.php?id='.$follow->id.'">';
+                      echo $follow->username;
+                      echo '</a><br>';
+                    }
+                  ?>
+                </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="collaboratorsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                  <?php 
+                    foreach($collaborators as $collaborator) {
+                      echo '<a href="profile.php?id='.$collaborator->id.'">';
+                      echo $collaborator->username;
+                      echo '</a><br>';
+                    }
+                  ?>
                 </div>
           </div>
         </div>

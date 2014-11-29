@@ -24,6 +24,8 @@ $GLOBALS['config'] = array(
 	)
 );
 
+define('MB', 1048576);
+
 spl_autoload_register( function($class) {
 	require_once( 'classes/'.$class.'.php');
 });

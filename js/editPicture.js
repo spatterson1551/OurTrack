@@ -18,9 +18,9 @@ $(document).ready(function() {
 		var file_data = $("#fileDialog").prop("files")[0];   // Getting the properties of file from file field
 		var form_data = new FormData();                  // Creating object of FormData class
 		form_data.append("file", file_data)              // Appending parameter named file with properties of file_field to form_data
-		form_data.append("_token", $("input[name='_token']").val())                 // Adding extra parameters to form_data
+		//form_data.append("_token", $("input[name='_token']").val())                 // Adding extra parameters to form_data
 		$.ajax({
-            url: "dummyPHP.php",
+            url: "editPicture.php",
             cache: false,
             contentType: false,
             processData: false,
