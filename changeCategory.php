@@ -23,10 +23,7 @@ if (Input::exists()) {
 				$string .= $track->displayMini();
 			}
 			echo $string;
-		} else {
-
 		}
-
 	}
 }
 

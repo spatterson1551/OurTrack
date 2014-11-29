@@ -18,7 +18,7 @@ $(document).ready( function () {
 			url: 'changeCategory.php', //script that will return new tracks based on new selected category
 			data: data,
 			success: function(data) { 
-				$("#trackSectin").html(data);
+				$("#trackSection").html(data);
 			}
 		})
 	});
