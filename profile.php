@@ -2,7 +2,34 @@
 
 require_once('core/init.php');
 
+$id=$_GET["id"];
 
+$user = new User($id);
+//  if (!$user->isloggedIn()) {
+//    Redirect::to('login.php');
+//  } else {
+    //all tracks the user owns.
+    $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `owner_id`=".$user->id, 'Track');
+    //all tracks the user likes.
+    $likes = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id` IN (SELECT `track_id` FROM likes WHERE `user_id`=".$user->id.")", 'Track');
+    //all tracks the user has left as replies
+    $replies = Database::getInstance()->fetchToClass("SELECT * FROM replies WHERE `owner_id`=".$user->id, 'Track');
+    //all the people that follow the user
+    $followers = Database::getInstance()->query("SELECT `username`, `id` FROM users WHERE `id` IN (SELECT `follower_id` FROM followers WHERE `user_id`=".$user->id.")")->results();
+    //all people the user follows
+    $follows = Database::getInstance()->query("SELECT `username`, `id` FROM users WHERE `id` IN (SELECT `user_id` FROM followers WHERE `follower_id`=".$user->id.")")->results();
+    //get all collaborators
+    $user1results = Database::getInstance()->query("SELECT `user1_id` FROM collaborators WHERE `user2_id`=".$user->id)->results();
+    $user2results = Database::getInstance()->query("SELECT `user2_id` FROM collaborators WHERE `user1_id`=".$user->id)->results();
+    $allIds = array();
+    foreach($user1results as $user1result) {
+      array_push($allIds, $user1result->user1_id);
+    }
+    foreach($user2results as $user2result) {
+      array_push($allIds, $user2result->user2_id);
+    }
+    $collaborators = Database::getInstance()->query("SELECT `username`, `id` FROM users WHERE `id` IN (".implode(',', $allIds).")")->results();
+//  }
 
 ?>
 
@@ -27,12 +54,12 @@ require_once('core/init.php');
       <div class="col-xs-9" style="margin-bottom: 5.714em;">
         <div class="col-xs-12" style="height: 10.714em; padding-left: 1.786em; margin-bottom: 2.857em;">
           <div class="col-xs-3" style="padding:0em;">
-            <img src="profileImages/default.png" alt="profile picture">
+            <img src=<?php echo '"profileImages/'.$user->picture.'"'; ?> alt="profile picture">
           </div>
           <div class="col-xs-9">
-            <h3 style="margin: 0em;"> User's Profile </h3>
-            <h4 style="margin: 0em;"> <small> 12 tracks </small> </h4>
-            <h4 style="margin: 0em;"> <small> 100 followers </small> </h4>
+            <h3 style="margin: 0em;"> <?php echo $user->username ?>'s Profile </h3>
+            <h4 style="margin: 0em;"> <small> <?php echo count($tracks); ?> tracks </small> </h4>
+            <h4 style="margin: 0em;"> <small> <?php echo count($followers); ?> followers </small> </h4>
             <div style="margin-top: 3.929em; text-align: right">
               <button id="follow" value="userID" class="btn btn-default btn-sm" data-toggle="modal" data-target="#loginModal"> FOLLOW </button>
               <button id="collaborate" class="btn btn-default btn-sm" data-toggle="modal" data-target="#loginModal"> COLLABORATE </button>
@@ -141,12 +168,12 @@ require_once('core/init.php');
                 <h3> <small> BIOGRAPHY </small> </h3>
               </div>
               <div class="col-xs-6 seeAllButton">
-                see all
+                <a href="" data-toggle="modal" data-target="#bioModal"> <span class="glyphicon glyphicon-pencil"></span></a>
               </div>
             </div>
             <div class="row">
-              <p>
-                This is a short bio about the user that will give basic info about that person
+              <p id="userBio">
+                <?php echo $user->bio ?>
               </p>
             </div>
           </div>
@@ -162,8 +189,19 @@ require_once('core/init.php');
               </div>
             </div>
             <div class="row">
-              <a href="#">username1</a><br>
-              <a href="#">username2</a><br>
+              <?php 
+				if (count($followers) > 0) {
+					foreach($followers as $follower) {
+					  echo '<a href="profile.php?id='.$follower->id.'">';
+					  echo $follower->username;
+					  echo '</a><br>';
+					}
+				} else {
+					//Maybe message? Would need to occur on dashboard as well
+					//echo "No Followers";
+				}
+				
+              ?>
             </div>
           </div>
         </div>
@@ -178,8 +216,13 @@ require_once('core/init.php');
               </div>
             </div>
             <div class="row">
-              <a href="#">username1</a> <br>
-              <a href="#">username2</a> <br>
+              <?php 
+                foreach($follows as $follow) {
+                  echo '<a href="profile.php?id='.$follow->id.'">';
+                  echo $follow->username;
+                  echo '</a><br>';
+                }
+              ?>
             </div>
           </div>
         </div>
@@ -193,8 +236,13 @@ require_once('core/init.php');
                 <button type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                  <a href="#">username1</a><br>
-                  <a href="#">username2</a><br>
+                  <?php 
+                    foreach($followers as $follower) {
+                      echo '<a href="profile.php?id='.$follower->id.'">';
+                      echo $follower->username;
+                      echo '</a><br>';
+                    }
+                  ?>
                 </div>
           </div>
         </div>
@@ -207,8 +255,13 @@ require_once('core/init.php');
                 <button type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                  <a href="#">username1</a><br>
-                  <a href="#">username2</a><br>
+                  <?php 
+                    foreach($follows as $follow) {
+                      echo '<a href="profile.php?id='.$follow->id.'">';
+                      echo $follow->username;
+                      echo '</a><br>';
+                    }
+                  ?>
                 </div>
           </div>
         </div>
