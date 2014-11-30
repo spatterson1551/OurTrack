@@ -28,6 +28,10 @@ $id = $_GET['id'];
   <!--************* begin content area ****************-->
   <?php 
   		$track = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id`='".escape($id)."'", "Track");
+  		$replies = Database::getInstance()->fetchToClass("SELECT * FROM replies WHERE `track_id`='".escape($id)."'", "Reply");
+  		
+  		$sort = new Sort($replies);
+  		$replies = $sort->sortByLikes();
 
   ?>
 	<div class="container">
@@ -64,89 +68,15 @@ $id = $_GET['id'];
 						</div>
 					</div>
 					<!--START REPLY -->
-						<div class="col-xs-12 trackReply">
-							<div class="row">
-								<div class="col-xs-2 col-xs-offset-1 trackThumb">
-									<img src="images/ajeif45s843l.jpg" width="120" height="120"  alt="Track Thumb"/>
-								</div>
-								<div class="col-xs-8">
-									<div class="row">
-										<div class="col-xs-6">
-											<p><a href="track.html" class="trackTitle">Track Title</a>
-											by <a href="profile.html" class="trackOwner">Owner</a></p>
-										</div>
-										<div class="col-xs-2 col-xs-offset-4">
-											<p style="float:right"><span class="numLikes">24</span> likes</p>
-										</div>
-									</div>
-									<div class="row audioSection">
-										<div class="col-xs-10">
-											<audio class="audioPlayer" controls="controls">
-											<source src="tracks/.mp3" type="audio/mpeg" />
-												Update your browser to play audio
-											</audio>
-										</div>
-										<div class="col-xs-2">
-											<button type="button" class="btn btn-default right likeReply" value="1">Like</button>
-										</div>
-									</div>
-									<div class="row tagSection">
-										<div class="tag">
-											tag 1
-										</div>
-										<div class="tag">
-											tag 2
-										</div>
-										<div class="trackCatDate">
-											<span>posted in <a href="#">Category</a><span class="daysSincePost"> 5</span> days ago</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--EndReply-->
-						<!--START REPLY -->
-						<div class="col-xs-12 trackReply">
-							<div class="row">
-								<div class="col-xs-2 col-xs-offset-1 trackThumb">
-									<img src="images/ajeif45s843l.jpg" width="120" height="120"  alt="Track Thumb"/>
-								</div>
-								<div class="col-xs-8">
-									<div class="row">
-										<div class="col-xs-6">
-											<p><a href="track.html" class="trackTitle">Track Title</a>
-											by <a href="profile.html" class="trackOwner">Owner</a></p>
-										</div>
-										<div class="col-xs-2 col-xs-offset-4">
-											<p style="float:right"><span class="numLikes">24</span> likes</p>
-										</div>
-									</div>
-									<div class="row audioSection">
-										<div class="col-xs-10">
-											<audio class="audioPlayer" controls="controls">
-											<source src="tracks/.mp3" type="audio/mpeg" />
-												Update your browser to play audio
-											</audio>
-										</div>
-										<div class="col-xs-2">
-											<button type="button" class="btn btn-default right likeReply" value="2">Like</button>
-										</div>
-									</div>
-									<div class="row tagSection">
-										<div class="tag">
-											tag 1
-										</div>
-										<div class="tag">
-											tag 2
-										</div>
-										<div class="trackCatDate">
-											<span>posted in <a href="#">Category</a><span class="daysSincePost"> 5</span> days ago</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--EndReply-->
+						<?php 
+
+						foreach($replies as $r)
+						{
+							echo $r->displayMini();
+						}
+
+						 ?>
+					<!--EndReply-->
 					</div>
 				</div>
 			</div>
