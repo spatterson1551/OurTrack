@@ -2,7 +2,9 @@
 
 require_once('core/init.php');
 
-$id = $_GET['id'];
+if (Input::exists('get')) {
+	$id = Input::get('id');
+}
 
 ?>
 

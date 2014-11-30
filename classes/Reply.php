@@ -43,9 +43,15 @@ class Reply {
 		}
 	}
 
+	public function displayForProfile() {
+		$owner = new User($this->owner_id);
+		$tags = Database::getInstance()->fetchToClass("SELECT * FROM tags WHERE `id` IN (SELECT `tag_id` FROM tagmaps WHERE `type` = 'reply' AND `track_id`=".$this->id.")", "Tag");
+		include 'includes/profileTrack.php';
+	}
+
 	public function displayMini() {
 		$owner = new User($this->owner_id);
-		$tags = Database::getInstance()->fetchToClass("SELECT * FROM tags WHERE `id` IN (SELECT `tag_id` FROM tagmaps WHERE `track_id`=".$this->id.")", "Tag");
+		$tags = Database::getInstance()->fetchToClass("SELECT * FROM tags WHERE `id` IN (SELECT `tag_id` FROM tagmaps WHERE `type` = 'reply' AND `track_id`=".$this->id.")", "Tag");
 		include 'includes/replyMini.php';
 	}
 }

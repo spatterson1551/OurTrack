@@ -10,7 +10,7 @@
     //all tracks the user likes.
     $likes = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id` IN (SELECT `track_id` FROM likes WHERE `user_id`=".$user->id.")", 'Track');
     //all tracks the user has left as replies
-    $replies = Database::getInstance()->fetchToClass("SELECT * FROM replies WHERE `owner_id`=".$user->id, 'Track');
+    $replies = Database::getInstance()->fetchToClass("SELECT * FROM replies WHERE `owner_id`=".$user->id, 'Reply');
     //all the people that follow the user
     $followers = Database::getInstance()->query("SELECT `username`, `id` FROM users WHERE `id` IN (SELECT `follower_id` FROM followers WHERE `user_id`=".$user->id.")")->results();
     //all people the user follows
@@ -85,127 +85,29 @@
           </div>
           <div class="tab-pane fade" id="tracks">
             <div class="col-xs-12">
-              <!-- ********** Begin Single Track Representation for a track on Profile List **************-->
-              <div class="profileTrack">
-                <div class="trackImage">
-                  <img src="images/ajeif45s843l.jpg" alt="track image">
-                </div>
-                <div class="trackContent">
-                  <div class="trackTitleOwnerTeaser">
-                    <div class="trackTitle">
-                      <a href="track.html">
-                        TRACK TITLE
-                      </a>
-                    </div>
-                    <div class="trackOwner">
-                      by <a href="#"> User </a>
-                    </div><br>
-                    <div class="trackAudio">
-                      <!-- design of this is subject to change -->
-                      <audio controls="controls">
-                        <source src="tracks/.mp3" type="audio/mpeg" />
-                        Update your browser to play audio
-                      </audio>
-                    </div>
-                  </div>
-                  <div class="trackLikes">
-                    12 <br> likes
-                  </div>
-                  <div class="trackTags">
-                    <div class="trackTag">
-                      tag1
-                    </div>
-                    <div class="trackTag">
-                      tag2
-                    </div>
-                  </div>
-                  <div class="trackCatDate">
-                    posted in <a href="#">Category</a> 
-                    1 day ago
-                  </div>
-                </div>
-              </div>
-              <!-- ********** End Single Track Representation for a track on Profile List **************-->
+              <?php 
+                foreach($tracks as $track) {
+                  $track->displayForProfile();
+                }
+              ?>
             </div>
           </div>
           <div class="tab-pane fade" id="replies">
             <div class="col-xs-12">
-              <div class="profileTrack">
-                <div class="trackImage">
-                  <img src="images/ajeif45s843l.jpg" alt="track image">
-                </div>
-                <div class="trackContent">
-                  <div class="trackTitleOwnerTeaser">
-                    <div class="trackTitle">
-                      <a href="track.html">
-                        TRACK TITLE
-                      </a>
-                    </div>
-                    <div class="trackOwner">
-                      by <a href="#"> User </a>
-                    </div><br>
-                    <div class="trackAudio">
-                      <!-- design of this is subject to change -->
-                      <audio controls="controls">
-                        <source src="tracks/.mp3" type="audio/mpeg" />
-                        Update your browser to play audio
-                      </audio>
-                    </div>
-                  </div>
-                  <div class="trackLikes">
-                    12 <br> likes
-                  </div>
-                  <div class="trackTags">
-                    <div class="trackTag">
-                      tag3
-                    </div>
-                  </div>
-                  <div class="trackCatDate">
-                    in Reply to <a href="#"> Track Link </a> by <a href="#"> User </a>
-                    1 day ago
-                  </div>
-                </div>
-              </div>
+              <?php
+                foreach($replies as $reply) {
+                  $reply->displayForProfile();
+                }
+              ?>
             </div>
           </div>
           <div class="tab-pane fade" id="likes">
             <div class="col-xs-12">
-              <div class="profileTrack">
-                <div class="trackImage">
-                  <img src="images/ajeif45s843l.jpg" alt="track image">
-                </div>
-                <div class="trackContent">
-                  <div class="trackTitleOwnerTeaser">
-                    <div class="trackTitle">
-                      <a href="track.html">
-                        TRACK TITLE
-                      </a>
-                    </div>
-                    <div class="trackOwner">
-                      by <a href="#"> User </a>
-                    </div><br>
-                    <div class="trackAudio">
-                      <!-- design of this is subject to change -->
-                      <audio controls="controls">
-                        <source src="tracks/.mp3" type="audio/mpeg" />
-                        Update your browser to play audio
-                      </audio>
-                    </div>
-                  </div>
-                  <div class="trackLikes">
-                    12 <br> likes
-                  </div>
-                  <div class="trackTags">
-                    <div class="trackTag">
-                      tag3
-                    </div>
-                  </div>
-                  <div class="trackCatDate">
-                    in Reply to <a href="#"> Track Link </a> by <a href="#"> User </a>
-                    1 day ago
-                  </div>
-                </div>
-              </div>
+              <?php
+                foreach($likes as $like) {
+                  $like->displayForProfile();
+                }
+              ?>
             </div>
           </div>
         </div>
