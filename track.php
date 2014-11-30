@@ -19,7 +19,6 @@ if (Input::exists('get')) {
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="css/mainLayout.css" rel="stylesheet">
   <link href="css/trackLayout.css" rel="stylesheet">
-  <link href="raty-2.7.0/lib/jquery.raty.css" rel="stylesheet">
   <title>OurTrack</title>
 </head>
 <body>
@@ -66,6 +65,9 @@ if (Input::exists('get')) {
 									<option value="top">Top Rated</option>
 									<option value="new">New</option>
 								</select>
+							</div>
+							<div class="col-xs-4">
+								<button type="button" class="btn btn-primary">Post Reply</button>
 							</div>
 						</div>
 					</div>
