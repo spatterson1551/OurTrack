@@ -71,7 +71,7 @@ $id = $_GET['id'];
 						<?php 
 
 						foreach($replies as $r)
-						{
+						{	
 							echo $r->displayMini();
 						}
 
