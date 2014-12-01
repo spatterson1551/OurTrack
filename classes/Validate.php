@@ -40,7 +40,7 @@ class Validate {
 								$this->addError("Problem uploading track audio");
 							}
 							//make sure audio files aren't too big
-							$maxFileSize = 150000000; //150mb
+							$maxFileSize = 150*MB; //150mb
 							if($_FILES['file1']["size"] > $maxFileSize) { //error
 								$this->addError("Audio file is too large");
 							}
@@ -74,7 +74,7 @@ class Validate {
 								$this->addError("Problem uploading track image");
 							}
 							//make sure image files aren't too big
-							$maxFileSize = 30000000; //30mb
+							$maxFileSize = 2*MB; //2mb
 							if($_FILES['file2']["size"] > $maxFileSize) { //error
 								$this->addError("Image is too large");
 							}

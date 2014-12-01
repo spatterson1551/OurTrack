@@ -2,6 +2,12 @@
 
 require_once('core/init.php');
 
+  //get id of track in URL
+  $trackid = Input::get('id');
+  //get info about track user is commenting on (need its title)
+  $track = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id`='".escape($trackid)."'", "Track");
+  //note: $track is an array with one value, so always use $track[0]
+
   //validating the uploaded form data
   if (Input::exists('post')) {
      $validate = new Validate();
@@ -14,9 +20,6 @@ require_once('core/init.php');
         'description'     => array(
           'min' => 0,
           'max' => 200 
-          ),
-        'category' => array(
-          'category' => null
           )
         )
     );
@@ -30,20 +33,10 @@ require_once('core/init.php');
       ));
 
     if ($validation->passed()) {
-      //create a new track and add to database, add tags to tag table, 
+      //create a new reply and add to database, add tags to tag table, 
       //create tagmap in tagmap table
 
-      //for "Share only with collaborators" checkbox
-      $collabBool;
-      if(empty(Input::get('collaborators')))
-      {
-        $collabBool = 0;
-      }
-      else {
-        $collabBool = 1;
-      }
-
-      //gets the tags the user specified for this track
+      //gets the tags the user specified for this reply
       $tags = explode(",", Input::get('allTags'));
 
       //for ignoring the last tag since it will always be blank (due 
@@ -86,40 +79,40 @@ require_once('core/init.php');
         $count++;
       }
 
-      $track = new Track();
+      $reply = new Reply();
       //gets currently-logged-in user
       $user = new User();
-      $track->create(array( //adds track to track table
+      $reply->create(array( //adds reply to reply table
+          'track_id'          => $trackid,
           'owner_id'          => $user->id,
           'picture'           => $validation->getImageLocation(),
           'source'            => $validation->getAudioLocation(),
           'title'             => Input::get('title'),
           'description'       => Input::get('description'),
           'genre'             => Input::get('category'),
-          'withcollaborators' => $collabBool,
           'likes'            => 0,
         ));
 
-      //gets the id of the track just added to table
+      //gets the id of the reply just added to table
       $max = "MAX(id)";
-      $var = Database::getInstance()->query("SELECT " . $max . " FROM tracks");
+      $var = Database::getInstance()->query("SELECT " . $max . " FROM replies");
       $result = array();
       foreach ($var->getResults() as $key => $value) {
           $result[] = $value->$max;
       }
 
-      //update tagmap table (maps tags to tracks)
+      //update tagmap table (maps tags to tracks or replies, depending on type)
       $tagmap = new Tagmap();
       foreach ($tagids as $tag => $id) {
         $tagmap->create(array(
         'track_id' => $result[0],
         'tag_id'   => $id,
-        'type'     => 'track'
+        'type'     => 'reply'
       ));
       }
       
-      //Take to the track page for just-uploaded track
-      Redirect::to('track.php?id='. $result[0]);
+      //Take to the track page for track replied to
+      Redirect::to('track.php?id='. $trackid);
 
       $errors = false;
     } else {
@@ -160,49 +153,13 @@ require_once('core/init.php');
     ?>
     <div class="row">
       <div class="col-xs-12">
-        <h2> Post a Track </h2>
+        <h2> Post a Reply to <?php echo $track[0]->title; ?></h2>
         <form id="createForm" action="#" method="POST" enctype="multipart/form-data" role="form" class="form-group" style="margin-bottom: 100px;">
           <div class="form-group">
-            <input id="title" name="title" type="text" class="form-control" placeholder="Track Title..." style="margin-bottom: 10px;">
+            <input id="title" name="title" type="text" class="form-control" placeholder="Reply Title..." style="margin-bottom: 10px;">
           </div>
           <div class="form-group">
-            <textarea id="description" name="description" class="form-control" rows="3" placeholder="Track Description..." style="margin-bottom: 10px;"></textarea>
-          </div>
-          <div class="form-group">
-            <label class="control-label" for="category">Category:</label>
-            <select id="category" name="category" class="form-control" style="margin-bottom: 10px;">
-              <option>Select A Category</option>
-              <option value="Alternative">Alternative</option>
-              <option value="Blues">Blues</option>
-              <option value="Classical">Classical</option>
-              <option value="Country">Country</option>
-              <option value="Disco">Disco</option>
-              <option value="Drum and Bass">Drum and Bass</option>
-              <option value="Dubstep">Dubstep</option>
-              <option value="Electronic">Electronic</option>
-              <option value="Folk">Folk</option>
-              <option value="Hardcore">Hardcore</option>
-              <option value="Hip Hop">Hip Hop</option>
-              <option value="House">House</option>
-              <option value="Indie">Indie</option>
-              <option value="Jazz">Jazz</option>
-              <option value="Latin">Latin</option>
-              <option value="Metal">Metal</option>
-              <option value="Minimal">Minimal</option>
-              <option value="Other">Other</option>
-              <option value="Piano">Piano</option>
-              <option value="Pop">Pop</option>
-              <option value="Progressive">Progressive</option>
-              <option value="Punk">Punk</option>
-              <option value="R and B">R and B</option>
-              <option value="Rap">Rap</option>
-              <option value="Reggae">Reggae</option>
-              <option value="Rock">Rock</option>
-              <option value="Soul">Soul</option>
-              <option value="Techno">Techno</option>
-              <option value="Trap">Trap</option>
-              <option value="World">World</option>
-            </select> 
+            <textarea id="description" name="description" class="form-control" rows="3" placeholder="Reply Description..." style="margin-bottom: 10px;"></textarea>
           </div>
           <div class="form-group">
             <label class="control-label" for="tags">Input a tag and hit enter to add it</label>
@@ -238,16 +195,6 @@ require_once('core/init.php');
             </div>
             <input type="file" name="file2" id="imageupload" class="upload">
           </div>
-          <div class="form-group">
-            <div class="col-xs-12">
-              <div class="checkbox">
-                <label>
-                  <input id="collaborators" name="collaborators" type="checkbox" value="1"> Share With Collaborators Only
-                </label>
-              </div>
-            </div>
-          </div>
-          <br>
           <div class="form-group">
             <input id="submit" type="submit" class="btn btn-large btn-success btn-block" value="Create" style="margin-bottom: 10px;">
           </div>
