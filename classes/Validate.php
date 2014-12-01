@@ -60,8 +60,9 @@ class Validate {
 							}
 							//Finally move the file to trackaudio folder
 							$fileToMove = $_FILES['file1']['tmp_name'];
-							$this->audioLocation = "./trackaudio/" . uniqid() . '.' . $extension;
-							if(move_uploaded_file($fileToMove, $this->audioLocation)) {
+							$this->audioLocation = uniqid() . '.' . $extension;
+							$audioLocationFolder = "./trackaudio/" . $this->audioLocation;
+							if(move_uploaded_file($fileToMove, $audioLocationFolder)) {
 								//good
 							}
 							else {
@@ -94,8 +95,9 @@ class Validate {
 							}
 							//Finally move the file to trackimages folder
 							$fileToMove = $_FILES['file2']['tmp_name'];
-							$this->imageLocation = "./trackimages/" . uniqid() . '.' . $extension;
-							if(move_uploaded_file($fileToMove, $this->imageLocation)) {
+							$this->imageLocation = uniqid() . '.' . $extension;
+							$imageLocationFolder = "./trackimages/" . $this->imageLocation;
+							if(move_uploaded_file($fileToMove, $imageLocationFolder)) {
 								//good
 							}
 							else {

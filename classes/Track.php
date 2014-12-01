@@ -37,7 +37,7 @@ class Track {
 
 	public function create($fields = array()) {
 		if (!$this->db->insert('tracks', $fields)) {
-			throw new Exception("There was an error registering the user");
+			throw new Exception("There was an error creating the track");
 		}
 	}
 
