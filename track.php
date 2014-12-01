@@ -67,7 +67,7 @@ if (Input::exists('get')) {
 								</select>
 							</div>
 							<div class="col-xs-4">
-								<button type="button" class="btn btn-primary">Post Reply</button>
+								<a class="btn btn-primary" role="button" href=<?php echo '"reply.php?id='.$id.'"';?>>Post Reply</a>
 							</div>
 						</div>
 					</div>
