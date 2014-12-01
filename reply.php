@@ -2,6 +2,11 @@
 
 require_once('core/init.php');
 
+  $user = new User();
+  if (!$user->isLoggedIn()) {
+    Redirect::to('login.php');
+  }
+
   //get id of track in URL
   if (Input::exists('get')) {
     $trackid = Input::get('id');

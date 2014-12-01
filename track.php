@@ -6,6 +6,8 @@ if (Input::exists('get')) {
 	$id = Input::get('id');
 }
 
+$user = new User();
+
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +51,7 @@ if (Input::exists('get')) {
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="replies">
 					<div class="row">
-						<div class="col-xs-4 dropDownSort">
+						<div class="col-xs-12 dropDownSort">
 							<!--<div class="dropdown">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
 								  	Top Rated
@@ -60,14 +62,18 @@ if (Input::exists('get')) {
 										<li role="presentation"><a role="menuitem" tabindex="-1" href="#">New</a></li>
 								  </ul>
 							</div>-->
-							<div class="form-group col-xs-8">
+							<div class="form-group col-xs-2">
 								<select id="sortDropDown" class="form-control">
 									<option value="top">Top Rated</option>
 									<option value="new">New</option>
 								</select>
 							</div>
-							<div class="col-xs-4">
-								<button type="button" class="btn btn-primary">Post Reply</button>
+							<div class="col-xs-2 col-xs-offset-8">
+								<?php if ($user->isLoggedIn()) { ?>
+									<a href=<?php echo '"reply.php?id='.$id.'"'?><button type="button" class="btn btn-primary">Post Reply</button></a>
+								<?php } else { ?>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Post Reply</button>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
@@ -86,6 +92,24 @@ if (Input::exists('get')) {
 			</div>
 		</div>
 	</div>
+
+
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                   <b> Oops! </b>
+                   <button type="button" class="close glyphicon glyphicon-remove" data-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                   You must be logged in to do that!
+                </div>
+                <div class="modal-footer">
+                  <a href="login.php"><button type="button" class="btn btn-default btn-sm"> Login </button></a>
+                </div>
+          </div>
+        </div>
+    </div>
  <!--************* end content area ****************-->
 
 
