@@ -3,123 +3,131 @@
 require_once('core/init.php');
 
   //get id of track in URL
-  $trackid = Input::get('id');
-  //get info about track user is commenting on (need its title)
-  $track = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id`='".escape($trackid)."'", "Track");
-  //note: $track is an array with one value, so always use $track[0]
+  if (Input::exists('get')) {
+    $trackid = Input::get('id');
+    //get info about track user is commenting on (need its title)
+    $track = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id`='".escape($trackid)."'", "Track");
+    //note: $track is an array with one value, so always use $track[0]
+    if (count($track) == 0) {
+      Redirect::to(404);
+    }
 
-  //validating the uploaded form data
-  if (Input::exists('post')) {
-     $validate = new Validate();
-     $tempvalidation = $validate->check($_POST, array(
-        'title'  => array(
-          'required' => true,
-          'min' => 1,
-          'max' => 100 //probably change this
-          ),
-        'description'     => array(
-          'min' => 0,
-          'max' => 200 
+    //validating the uploaded form data
+    if (Input::exists('post')) {
+       $validate = new Validate();
+       $tempvalidation = $validate->check($_POST, array(
+          'title'  => array(
+            'required' => true,
+            'min' => 1,
+            'max' => 100 //probably change this
+            ),
+          'description'     => array(
+            'min' => 0,
+            'max' => 200 
+            )
           )
-        )
-    );
-     $validation = $tempvalidation->validateFiles(array(
-        'file1' => array(
-          'trackvalidation' => null
-          ),
-        'file2' => array(
-          'imagevalidation' => null
-          )
-      ));
-
-    if ($validation->passed()) {
-      //create a new reply and add to database, add tags to tag table, 
-      //create tagmap in tagmap table
-
-      //gets the tags the user specified for this reply
-      $tags = explode(",", Input::get('allTags'));
-
-      //for ignoring the last tag since it will always be blank (due 
-      //to extraneous comma at end of tag string in create.js)
-      $numtags = count($tags);
-      $count = 1;
-
-      //go through all the tags and get their id's (to be used in tagmaps table)
-      $tagids = array();
-      foreach ($tags as $tag => $value) {
-        if($count >= $numtags) {
-          break; //ignore the last tag (it's blank)
-        }
-        //see if tag is already in tag table
-        $query = Database::getInstance()->query("SELECT * FROM tags WHERE name='" . $value . "'");
-        if(!$query->getCount()) //if not in tag table, add it
-        {
-          $temptag = new Tag();
-          $temptag->create(array(
-            'name' => $value
-          ));
-          //gets the id of tag just added
-          $max = "MAX(id)";
-          $var = Database::getInstance()->query("SELECT " . $max . " FROM tags");
-          $result = array();
-          foreach ($var->getResults() as $key => $value) {
-              $result[] = $value->$max;
-          }
-          $tagids[] = $result[0];
-        }
-        else { 
-          //gets the id of the matching tag -- to be used in tagmaps table
-          foreach ($query->getResults() as $key => $value) {
-            foreach ($value as $k => $v) {
-              $tagids[] = $v;
-              break; //we only want the first field (id), not the second (name)
-            }
-          }
-        }
-        $count++;
-      }
-
-      $reply = new Reply();
-      //gets currently-logged-in user
-      $user = new User();
-      $reply->create(array( //adds reply to reply table
-          'track_id'          => $trackid,
-          'owner_id'          => $user->id,
-          'picture'           => $validation->getImageLocation(),
-          'source'            => $validation->getAudioLocation(),
-          'title'             => Input::get('title'),
-          'description'       => Input::get('description'),
-          'genre'             => Input::get('category'),
-          'likes'            => 0,
+      );
+       $validation = $tempvalidation->validateFiles(array(
+          'file1' => array(
+            'trackvalidation' => null
+            ),
+          'file2' => array(
+            'imagevalidation' => null
+            )
         ));
 
-      //gets the id of the reply just added to table
-      $max = "MAX(id)";
-      $var = Database::getInstance()->query("SELECT " . $max . " FROM replies");
-      $result = array();
-      foreach ($var->getResults() as $key => $value) {
-          $result[] = $value->$max;
-      }
+      if ($validation->passed()) {
+        //create a new reply and add to database, add tags to tag table, 
+        //create tagmap in tagmap table
 
-      //update tagmap table (maps tags to tracks or replies, depending on type)
-      $tagmap = new Tagmap();
-      foreach ($tagids as $tag => $id) {
-        $tagmap->create(array(
-        'track_id' => $result[0],
-        'tag_id'   => $id,
-        'type'     => 'reply'
-      ));
-      }
-      
-      //Take to the track page for track replied to
-      Redirect::to('track.php?id='. $trackid);
+        //gets the tags the user specified for this reply
+        $tags = explode(",", Input::get('allTags'));
 
-      $errors = false;
+        //for ignoring the last tag since it will always be blank (due 
+        //to extraneous comma at end of tag string in create.js)
+        $numtags = count($tags);
+        $count = 1;
+
+        //go through all the tags and get their id's (to be used in tagmaps table)
+        $tagids = array();
+        foreach ($tags as $tag => $value) {
+          if($count >= $numtags) {
+            break; //ignore the last tag (it's blank)
+          }
+          //see if tag is already in tag table
+          $query = Database::getInstance()->query("SELECT * FROM tags WHERE name='" . $value . "'");
+          if(!$query->getCount()) //if not in tag table, add it
+          {
+            $temptag = new Tag();
+            $temptag->create(array(
+              'name' => $value
+            ));
+            //gets the id of tag just added
+            $max = "MAX(id)";
+            $var = Database::getInstance()->query("SELECT " . $max . " FROM tags");
+            $result = array();
+            foreach ($var->getResults() as $key => $value) {
+                $result[] = $value->$max;
+            }
+            $tagids[] = $result[0];
+          }
+          else { 
+            //gets the id of the matching tag -- to be used in tagmaps table
+            foreach ($query->getResults() as $key => $value) {
+              foreach ($value as $k => $v) {
+                $tagids[] = $v;
+                break; //we only want the first field (id), not the second (name)
+              }
+            }
+          }
+          $count++;
+        }
+
+        $reply = new Reply();
+        //gets currently-logged-in user
+        $user = new User();
+        $reply->create(array( //adds reply to reply table
+            'track_id'          => $trackid,
+            'owner_id'          => $user->id,
+            'picture'           => $validation->getImageLocation(),
+            'source'            => $validation->getAudioLocation(),
+            'title'             => Input::get('title'),
+            'description'       => Input::get('description'),
+            'genre'             => Input::get('category'),
+            'likes'            => 0,
+          ));
+
+        //gets the id of the reply just added to table
+        $max = "MAX(id)";
+        $var = Database::getInstance()->query("SELECT " . $max . " FROM replies");
+        $result = array();
+        foreach ($var->getResults() as $key => $value) {
+            $result[] = $value->$max;
+        }
+
+        //update tagmap table (maps tags to tracks or replies, depending on type)
+        $tagmap = new Tagmap();
+        foreach ($tagids as $tag => $id) {
+          $tagmap->create(array(
+          'track_id' => $result[0],
+          'tag_id'   => $id,
+          'type'     => 'reply'
+        ));
+        }
+        
+        //Take to the track page for track replied to
+        Redirect::to('track.php?id='. $trackid);
+
+        $errors = false;
+      } else {
+        $errors = true;
+      }
     } else {
-      $errors = true;
+      $errors = false;
     }
   } else {
-    $errors = false;
+    //input does not exist
+    Redirect::to(404);
   }
 
 ?>
