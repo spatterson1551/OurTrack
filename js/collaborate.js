@@ -1,19 +1,19 @@
 $(document).ready(function() {
 
-	$("#follow").click(function() {
+	$("#collaborate").click(function() {
 		data = {
 			id: $(this).val(),
-			_token: $("input[name='_token']").val()
+			//_token: $("input[name='_token']").val()
 		}
 		$.ajax({
 			type: 'POST',
-			url: 'http://localhost:8888/laravelProjects/shamelessPlug/public/users/follow',
+			url: 'collaborate.php',
 			data: data,
 			success: function(data) {
-				if (data == 1) {
-					$("#follow").html('FOLLOWING');
-					$("#follow").attr('disabled', true);
-				} else if (data == 0) {
+				if (data == 'valid') {
+					$("#collaborate").html('COLLABORATOR');
+					$("#collaborate").attr('disabled', true);
+				} else if (data == 'invalid') {
 					$("#loginModal").modal('show');
 				}
 			}

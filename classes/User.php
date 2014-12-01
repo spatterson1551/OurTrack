@@ -69,10 +69,6 @@ class User {
 			if ($this->password === Hash::make($password, $this->salt)) {
 				Session::put($this->sessionName, $this->id);
 
-				if ($remember) {
-
-				}
-
 				return true;
 			}
 		}
