@@ -137,7 +137,7 @@ require_once('core/init.php');
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="bootstrap/jquery/jquery-2.0.3.js"></script>
-  <script src="js/createTrack.js"></script>
+  <script src="js/reply.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="css/mainLayout.css" rel="stylesheet">
   <link href="css/create.css" rel="stylesheet">
