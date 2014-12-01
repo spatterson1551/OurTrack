@@ -28,11 +28,11 @@
         </form>
       <ul class="nav navbar-nav navbar-right">
         <?php 
-          $user = new User();
-          if ($user->isLoggedIn()) { ?>
+          $headerUser = new User();
+          if ($headerUser->isLoggedIn()) { ?>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" style="color:rgb(0, 210, 0);" data-toggle="dropdown">
-                 <?php echo $user->username; ?>
+                 <?php echo $headerUser->username; ?>
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
