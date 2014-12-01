@@ -15,7 +15,7 @@
       <div class="trackAudio">
         <!-- design of this is subject to change -->
         <audio controls="controls">
-          <source src=<?php echo '"tracks/'.$this->source.'"';?> type="audio/mpeg" />
+          <source src=<?php echo '"trackAudio/'.$this->source.'"';?> type="audio/mpeg" />
           Update your browser to play audio
         </audio>
       </div>

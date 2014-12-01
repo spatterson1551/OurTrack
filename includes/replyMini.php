@@ -16,7 +16,7 @@
 			<div class="row audioSection">
 				<div class="col-xs-10">
 					<audio class="audioPlayer" controls="controls">
-					<source src=<?php echo '"tracks/'.$this->source.'"';?> type="audio/mpeg" />
+					<source src=<?php echo '"trackAudio/'.$this->source.'"';?> type="audio/mpeg" />
 						Update your browser to play audio
 					</audio>
 				</div>
