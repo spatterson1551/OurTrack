@@ -177,6 +177,7 @@ $("#trackupload:file").change(function (){
         $("#audioGlyph").css("visibility", "hidden");
         $("#audioCancelGlyph").css("visibility", "hidden");
        $("#status").html("");
+       fileName = fileName.replace("C:\\fakepath\\","");
        $("#audioText").html(fileName);
        if(fileName ==""){
    		$("#audioText").html("Click anywhere to select a file");
@@ -272,6 +273,7 @@ $("#imageupload:file").change(function (){
         $("#imageGlyph").css("visibility", "hidden");
         $("#imageCancelGlyph").css("visibility", "hidden");
        $("#imageStatus").html("");
+       fileName = fileName.replace("C:\\fakepath\\","");
        $("#imageText").html(fileName);
        if(fileName ==""){
    		$("#imageText").html("Click anywhere to select a file");
