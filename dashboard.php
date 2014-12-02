@@ -81,6 +81,10 @@
               <p> List of important news, such as tracks posted by collaborators or users you follow, new friendships made by people you collab with,
                 etc. will go here.
               </p>
+              <p>
+                *** News Feed functionality is very database intensive (meaning complex SQL queries) and therefore will be implemented in the final stage of the 
+                 project ***
+              </p>
             </div>
           </div>
           <div class="tab-pane fade" id="tracks">

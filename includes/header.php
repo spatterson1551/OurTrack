@@ -21,6 +21,8 @@
       <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search">
+            <!-- Search functionality is very database intensive (meaning complex SQL queries) and therefore will be implemented in the final stage of the 
+                 project -->
           </div>
           <button type="submit" class="btn btn-default">
             <span class="glyphicon glyphicon-search"></span>

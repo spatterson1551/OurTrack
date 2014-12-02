@@ -1,7 +1,7 @@
 <div class="col-xs-12 trackReply">
 	<div class="row">
 		<div class="col-xs-2 col-xs-offset-1 trackThumb">
-			<img src=<?php echo '"images/'.$this->picture.'"'; ?> width="120" height="120"  alt="Track Thumb"/>
+			<img src=<?php echo '"trackImages/'.$this->picture.'"'; ?> width="120" height="120"  alt="Track Thumb"/>
 		</div>
 		<div class="col-xs-9">
 			<div class="row">
@@ -37,7 +37,7 @@
         			}
         		?>
 				<div class="trackCatDate">
-					<span>posted in <a href="#">Category</a><span class="daysSincePost"> 5</span> days ago</span>
+					<span>posted<span class="daysSincePost"> 5</span> days ago</span>
 				</div>
 			</div>
 		</div>

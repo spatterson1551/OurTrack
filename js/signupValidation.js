@@ -191,7 +191,7 @@ $("#username").keyup(function(){
 $("#submit").click(function(event){
 	if(doesMatch && isEmail && isUsername)
 	{
-		alert("sign up successful"); //this will be removed once back end is in place
+		//good to go
 	}
 	else
 	{

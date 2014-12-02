@@ -10,7 +10,6 @@ class Reply {
 	public $source;
 	public $title;
 	public $description;
-	public $genre;
 	public $likes;
 	public $created_at;
 
@@ -30,7 +29,6 @@ class Reply {
 				$this->picture = $data->first()->picture;
 				$this->source = $data->first()->source;
 				$this->description = $data->first()->description;
-				$this->genre = $data->first()->genre;
 				$this->likes = $data->first()->likes;
 				$this->created_at = $data->first()->created_at;
 			}

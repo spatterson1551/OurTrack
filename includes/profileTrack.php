@@ -1,6 +1,7 @@
+<?php use Carbon\Carbon; ?>
 <div class="profileTrack">
   <div class="trackImage">
-    <img src=<?php echo '"images/'.$this->picture.'"'; ?> alt="track image">
+    <img src=<?php echo '"trackImages/'.$this->picture.'"'; ?> alt="track image" width="200" height="150">
   </div>
   <div class="trackContent">
     <div class="trackTitleOwnerTeaser">
@@ -31,7 +32,7 @@
     </div>
     <div class="trackCatDate">
       posted in <a href=<?php echo '"home.php?genre='.$this->genre.'"';?>><?php echo $this->genre ?></a> 
-      1 day ago
+      <?php echo Carbon::createFromTimeStamp(strtotime($this->created_at))->diffForHumans();?>
     </div>
   </div>
 </div>

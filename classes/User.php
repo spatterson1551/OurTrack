@@ -9,7 +9,6 @@ class User {
 	public $salt;
 	public $bio;
 	public $picture;
-	public $url;
 
 	private $db;
 	//private $data;
@@ -55,7 +54,6 @@ class User {
 				$this->salt = $data->first()->salt;
 				$this->bio = $data->first()->bio;
 				$this->picture = $data->first()->picture;
-				$this->url = $data->first()->url;
 				return true;
 			}
 		}

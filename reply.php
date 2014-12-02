@@ -98,7 +98,6 @@ require_once('core/init.php');
             'source'            => $validation->getAudioLocation(),
             'title'             => Input::get('title'),
             'description'       => Input::get('description'),
-            'genre'             => Input::get('category'),
             'likes'            => 0,
           ));
 

@@ -35,19 +35,16 @@ require_once('core/init.php');
     <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-4">
-        <h2>More Info</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <h2>Follow users</h2>
+        <p> Follow other users to keep up to date on the tracks and reples that they post. </p>
       </div>
       <div class="col-md-4">
-        <h2>More Info</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <h2>Tag Tracks</h2>
+        <p>Tag tracks with any keywords that best describe your track. You can also search tracks by tag. </p>
      </div>
       <div class="col-md-4">
-        <h2>More Info</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        <h2>Collaborators</h2>
+        <p>Become a collaborator with another user in order to keep tracks private amongst those whose skills you admire</p>
       </div>
     </div>
   </div>

@@ -1,8 +1,9 @@
+<?php use Carbon\Carbon; ?>
 <?php if ($this->userCanSeeTrack()) {  ?>
   <div class="col-xs-12 trackListElement">
     <div class="row">
       <div class="col-xs-2 trackThumb">
-        <img src=<?php echo '"images/'.$this->picture.'"'; ?> width="120" height="120"  alt="Track Thumb"/>
+        <img src=<?php echo '"trackImages/'.$this->picture.'"'; ?> width="120" height="120"  alt="Track Thumb"/>
       </div>
       <div class="col-xs-10">
         <div class="row">
@@ -35,7 +36,7 @@
           }
           ?>
           <div class="trackCatDate">
-            <span>posted in <a href=<?php echo '"home.php?genre='.$this->genre.'"';?>><?php echo $this->genre ?></a><span class="daysSincePost"> 5</span> days ago</span>
+            <span>posted in <a href=<?php echo '"home.php?genre='.$this->genre.'"';?>><?php echo $this->genre ?></a><span class="daysSincePost"> <?php echo Carbon::createFromTimeStamp(strtotime($this->created_at))->diffForHumans();?></span></span>
           </div>
         </div>
       </div>

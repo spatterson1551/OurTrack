@@ -37,8 +37,7 @@ require_once('core/init.php');
           'password'    => Hash::make(Input::get('password'), $salt),
           'salt'        => $salt,
           'bio'         => '',
-          'picture'     => 'default.png',
-          'url'         => ''
+          'picture'     => 'default.png'
       ));
       
       Redirect::to('dashboard.php');
