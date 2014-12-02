@@ -21,7 +21,11 @@
           </audio>
         </div>
         <div class="col-xs-2">
-          <button type="button" class="btn btn-default right likeTrack" value=<?php echo '"'.$this->id.'"'?>>Like</button>
+          <?php if ($this->userLikesTrack()) { ?>
+            <button type="button" class="btn btn-default right unlikeTrack" value=<?php echo '"'.$this->id.'"'?>>Unlike</button>
+          <?php } else { ?>
+            <button type="button" class="btn btn-default right likeTrack" value=<?php echo '"'.$this->id.'"'?>>Like</button>
+          <?php } ?>
         </div>
       </div>
       <div class="tagSection">

@@ -49,10 +49,27 @@ class Reply {
 		include 'includes/profileTrack.php';
 	}
 
-	public function displayMini() {
+	public function displayMini($ownerIsViewing) {
 		$owner = new User($this->owner_id);
 		$tags = Database::getInstance()->fetchToClass("SELECT * FROM tags WHERE `id` IN (SELECT `tag_id` FROM tagmaps WHERE `type` = 'reply' AND `track_id`=".$this->id.")", "Tag");
 		include 'includes/replyMini.php';
+	}
+
+	public function userLikesReply() {
+		if (!isset($user)) {
+			$user = new User();
+		}
+		if ($user->isLoggedIn()) {
+			$likeQuery = Database::getInstance()->query("SELECT * FROM rlikes WHERE `reply_id`= ? AND `user_id`=?", array($this->id, $user->id));
+			if ($likeQuery->count() > 0) {
+				$likesReply = true;
+			} else {
+				$likesReply = false;
+			}
+		} else {
+			$likesReply = false;
+		}
+		return $likesReply;
 	}
 }
 

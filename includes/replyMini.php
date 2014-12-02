@@ -3,7 +3,7 @@
 		<div class="col-xs-2 col-xs-offset-1 trackThumb">
 			<img src=<?php echo '"images/'.$this->picture.'"'; ?> width="120" height="120"  alt="Track Thumb"/>
 		</div>
-		<div class="col-xs-8">
+		<div class="col-xs-9">
 			<div class="row">
 				<div class="col-xs-6">
 					<p><a href=<?php echo '"track.php?id='.$this->id.'"';?> class="trackTitle"><?php echo $this->title ?></a>
@@ -14,14 +14,21 @@
 				</div>
 			</div>
 			<div class="row audioSection">
-				<div class="col-xs-10">
+				<div class="col-xs-8">
 					<audio class="audioPlayer" controls="controls">
 					<source src=<?php echo '"trackAudio/'.$this->source.'"';?> type="audio/mpeg" />
 						Update your browser to play audio
 					</audio>
 				</div>
-				<div class="col-xs-2">
-					<button type="button" class="btn btn-default right likeReply" value=<?php echo '"'.$this->id.'"'?>>Like</button>
+				<div class="col-xs-4">
+					<?php if ($ownerIsViewing) { ?>
+						<button type="button" class="btn btn-primary downloadReply" style="margin-left:30px;">Download</button>
+					<?php } ?>
+					<?php if ($this->userLikesReply()) { ?>
+						<button type="button" class="btn btn-default right unlikeReply" value=<?php echo '"'.$this->id.'"'?>>Unlike</button>
+					<?php } else { ?>
+						<button type="button" class="btn btn-default right likeReply" value=<?php echo '"'.$this->id.'"'?>>Like</button>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="row tagSection">

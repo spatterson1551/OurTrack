@@ -3,7 +3,7 @@
 
 class Track {
 
-
+	public $id;
 	public $owner_id;
 	public $picture;
 	public $source;
@@ -23,6 +23,7 @@ class Track {
 			$data = $this->db->get('tracks', array('id', '=', $id));
 
 			if ($data->count()) {
+				$this->id = $data->first()->id;
 				$this->owner_id = $data->first()->owner_id;
 				$this->title = $data->first()->title;
 				$this->picture = $data->first()->picture;
@@ -57,6 +58,23 @@ class Track {
 		$owner = new User($this->owner_id);
 		$tags = Database::getInstance()->fetchToClass("SELECT * FROM tags WHERE `id` IN (SELECT `tag_id` FROM tagmaps WHERE `type` = 'reply' AND `track_id`=".$this->id.")", "Tag");
 		include 'includes/trackFull.php';
+	}
+
+	public function userLikesTrack() {
+		if (!isset($user)) {
+			$user = new User();
+		}
+		if ($user->isLoggedIn()) {
+			$likeQuery = Database::getInstance()->query("SELECT * FROM likes WHERE `track_id`= ? AND `user_id`=?", array($this->id, $user->id));
+			if ($likeQuery->count() > 0) {
+				$likesTrack = true;
+			} else {
+				$likesTrack = false;
+			}
+		} else {
+			$likesTrack = false;
+		}
+		return $likesTrack;
 	}
 }
 

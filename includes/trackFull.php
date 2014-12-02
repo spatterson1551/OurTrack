@@ -24,7 +24,11 @@
 											<button type="button" class="btn btn-primary right">Download</button>
 								</div>
 								<div class="col-xs-1">
+										<?php if($this->userLikesTrack()) { ?>
+											<button type="button" class="btn btn-default right unlikeTrack" value="1">Unlike</button>
+										<?php } else { ?>
 											<button type="button" class="btn btn-default right likeTrack" value="1">Like</button>
+										<?php } ?>
 								</div>
 							</div>
 							<div class="row">
@@ -42,7 +46,7 @@
 									        ?>
 										</div>
 										<div class="col-xs-3">
-											<h4><span><?php echo $this->likes ?></span> likes</h4>
+											<h4><span id="trackLikes"><?php echo $this->likes ?></span> likes</h4>
 										</div>
 									</div>
 								</div>

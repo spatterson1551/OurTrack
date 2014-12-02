@@ -4,9 +4,24 @@ require_once('core/init.php');
 
 if (Input::exists('get')) {
 	$id = Input::get('id');
-}
+	$track = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id`='".escape($id)."'", "Track");
+	if (count($track) == 0) {
+		Redirect::to(404);
+	}
 
-$user = new User();
+	$user = new User();
+
+	if ($user->isLoggedIn()) {
+		if ($user->id == $track[0]->owner_id) {
+			//user who owns the track is viewing it
+			$ownerIsViewing = true;
+		} else {
+			$ownerIsViewing = false;
+		}
+	} else {
+		$ownerIsViewing = false;
+	}
+}
 
 ?>
 
@@ -30,7 +45,7 @@ $user = new User();
 	
   <!--************* begin content area ****************-->
   <?php 
-  		$track = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id`='".escape($id)."'", "Track");
+  		
   		$replies = Database::getInstance()->fetchToClass("SELECT * FROM replies WHERE `track_id`='".escape($id)."'", "Reply");
   		
   		$sort = new Sort($replies);
@@ -78,15 +93,17 @@ $user = new User();
 						</div>
 					</div>
 					<!--START REPLY -->
+					<div id="replySection">
 						<?php 
 
 						foreach($replies as $r)
 						{
-							echo $r->displayMini();
+							echo $r->displayMini($ownerIsViewing);
 						}
 
 						 ?>
 					<!--EndReply-->
+					</div>
 					</div>
 				</div>
 			</div>

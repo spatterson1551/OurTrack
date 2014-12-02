@@ -7,16 +7,16 @@ $user = new User();
 if ($user->isLoggedIn()) {
 	if (Input::exists()) {
 
-		if (Input::get('track_id')) {
+		if (Input::get('reply_id')) {
 
-			$track_id = Input::get('track_id');
+			$reply_id = Input::get('reply_id');
 
-			$update = Database::getInstance()->query("UPDATE tracks SET `likes`=`likes`+1 WHERE `id`=?", array($track_id));
+			$update = Database::getInstance()->query("UPDATE replies SET `likes`=`likes`+1 WHERE `id`=?", array($reply_id));
 			if(!$update->error()) {
-				$like = new Like();
+				$rlike = new Rlike();
 				try {
-					$like->create(array(
-					'track_id' => $track_id,
+					$rlike->create(array(
+					'reply_id' => $reply_id,
 					'user_id' => $user->id
 					));
 				} catch (Exception $e) {
