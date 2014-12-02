@@ -10,6 +10,7 @@ class Track {
 	public $title;
 	public $description;
 	public $genre;
+	public $withcollaborators;
 	public $likes;
 	public $created_at;
 
@@ -30,6 +31,7 @@ class Track {
 				$this->source = $data->first()->source;
 				$this->description = $data->first()->description;
 				$this->genre = $data->first()->genre;
+				$this->withcollaborators = $data->first()->withcollaborators;
 				$this->likes = $data->first()->likes;
 				$this->created_at = $data->first()->created_at;
 			}
@@ -75,6 +77,35 @@ class Track {
 			$likesTrack = false;
 		}
 		return $likesTrack;
+	}
+
+	public function userCanSeeTrack() {
+
+		if ($this->withcollaborators) {
+			if (!isset($user)) {
+				$user = new User();
+			}
+			if ($user->isLoggedIn()) {
+				$user1results = Database::getInstance()->query("SELECT `user1_id` FROM collaborators WHERE `user2_id`=".$this->owner_id)->results();
+			    $user2results = Database::getInstance()->query("SELECT `user2_id` FROM collaborators WHERE `user1_id`=".$this->owner_id)->results();
+			    $allIds = array();
+			    foreach($user1results as $user1result) {
+			      array_push($allIds, $user1result->user1_id);
+			    }
+			    foreach($user2results as $user2result) {
+			      array_push($allIds, $user2result->user2_id);
+			    }
+			    if (in_array($user->id, $allIds)) {
+			    	return true;
+			    } else {
+			    	return false;
+			    }
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
 	}
 }
 

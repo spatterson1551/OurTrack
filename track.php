@@ -11,6 +11,10 @@ if (Input::exists('get')) {
 
 	$user = new User();
 
+	if (!$track[0]->userCanSeeTrack()) {
+		Redirect::to('errors/private.php');
+	}
+
 	if ($user->isLoggedIn()) {
 		if ($user->id == $track[0]->owner_id) {
 			//user who owns the track is viewing it

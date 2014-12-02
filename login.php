@@ -76,13 +76,13 @@ require_once('core/init.php');
     			<div class="form-group">
     				<input type="password" id="pass" name="password" class="form-control" placeholder="Password" style="margin-bottom: 10px;">
           </div>
-  			  <div class="col-xs-12">
+  			  <!--<div class="col-xs-12">
             <div class="checkbox">
               <label>
                 <input type="checkbox" value="remember"> Remember Me
               </label>
             </div>
-          </div>
+          </div>-->
           <div class="form-group">
            <input type="submit" id="submit" class="btn btn-large btn-success btn-block" value="Log In" style="margin-bottom: 10px;">
           </div>

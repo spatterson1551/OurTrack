@@ -97,7 +97,7 @@ require_once('core/init.php');
           'description'       => Input::get('description'),
           'genre'             => Input::get('category'),
           'withcollaborators' => $collabBool,
-          'likes'            => 0,
+          'likes'             => 0,
         ));
 
       //gets the id of the track just added to table

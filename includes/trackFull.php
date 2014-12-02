@@ -14,20 +14,20 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-xs-9">
+								<div class="col-xs-8">
 									<audio class="topAudioPlayer" controls="controls">
 											<source src=<?php echo '"trackAudio/'.$this->source.'"';?> type="audio/mpeg" />
 												Update your browser to play audio
 									</audio>
 								</div>
-								<div class="col-xs-1 col-xs-offset-1">
-											<button type="button" class="btn btn-primary right">Download</button>
+								<div class="col-xs-2">
+									<a href=<?php echo '"trackAudio/'.$this->source.'"';?>target="_blank"><button type="button" class="btn btn-primary ">Download</button></a>
 								</div>
-								<div class="col-xs-1">
+								<div class="col-xs-2">
 										<?php if($this->userLikesTrack()) { ?>
-											<button type="button" class="btn btn-default right unlikeTrack" value="1">Unlike</button>
+											<button type="button" class="btn btn-default unlikeTrack" value="1">Unlike</button>
 										<?php } else { ?>
-											<button type="button" class="btn btn-default right likeTrack" value="1">Like</button>
+											<button type="button" class="btn btn-default likeTrack" value="1">Like</button>
 										<?php } ?>
 								</div>
 							</div>
