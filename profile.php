@@ -141,7 +141,7 @@ if (Input::exists('get')) {
           </div>
         </div>
       </div>
-      <div class="col-xs-3" id="userBio">
+      <div class="col-xs-3" id="sideBar">
         <div class="row">
           <div class="col-xs-12">
             <div class="row">
@@ -259,7 +259,7 @@ if (Input::exists('get')) {
                    You must be logged in to do that!
                 </div>
                 <div class="modal-footer">
-                  <a href="login.php"><button type="button" class="btn btn-default btn-sm"> Login </button></a>
+                  <a href="login.php" class="btn btn-default btn-sm"> Login </a>
                 </div>
           </div>
         </div>

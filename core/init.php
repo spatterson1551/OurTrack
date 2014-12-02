@@ -20,7 +20,7 @@ $GLOBALS['config'] = array(
 	),
 	'genres' => array(
 		'Alternative', 'Blues', 'Classical', 'Country', 'Disco', 'Drum and Bass', 'Dubstep', 'Electronic', 'Folk', 'Hardcore', 'Hip Hop', 'House', 'Indie',
-		'Jazz', 'Latin', 'Metal', 'Minimal', 'Other', 'Piano', 'Pop', 'Progressive', 'Punk', 'R&B', 'Rap', 'Raggae', 'Rock', 'Soul', 'Techno', 'Trap', 'World'
+		'Jazz', 'Latin', 'Metal', 'Minimal', 'Other', 'Piano', 'Pop', 'Progressive', 'Punk', 'R&amp;B', 'Rap', 'Raggae', 'Rock', 'Soul', 'Techno', 'Trap', 'World'
 	)
 );
 

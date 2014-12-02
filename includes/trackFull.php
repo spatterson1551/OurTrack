@@ -21,7 +21,7 @@
 							</audio>
 						</div>
 						<div class="col-xs-2">
-							<a href=<?php echo '"trackAudio/'.$this->source.'"';?>target="_blank"><button type="button" class="btn btn-primary ">Download</button></a>
+							<a href=<?php echo '"trackAudio/'.$this->source.'"';?> target="_blank" class="btn btn-primary ">Download</a>
 						</div>
 						<div class="col-xs-2">
 								<?php if($this->userLikesTrack()) { ?>

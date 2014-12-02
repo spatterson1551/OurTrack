@@ -63,8 +63,8 @@ if (Input::exists('get')) {
               <label class="control-label col-xs-4" for="sortDropDown" style="text-align: right; padding-top: 5px;">Sort By:</label>
               <div class="form-group col-xs-8">
                 <select id="sortDropDown" class="form-control">
-                  <option value="top">Top Rated</option>
                   <option value="new">New</option>
+                  <option value="top">Top Rated</option>
                 </select>
               </div>
             </div>

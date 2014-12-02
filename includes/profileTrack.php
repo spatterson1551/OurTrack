@@ -31,7 +31,11 @@
       ?>
     </div>
     <div class="trackCatDate">
-      posted in <a href=<?php echo '"home.php?genre='.$this->genre.'"';?>><?php echo $this->genre ?></a> 
+      <?php if (isset($this->genre)) { ?>
+        posted in <a href=<?php echo '"home.php?genre='.$this->genre.'"';?> ><?php echo $this->genre ?></a> 
+      <?php } else { ?>
+        posted
+      <?php } ?>
       <?php echo Carbon::createFromTimeStamp(strtotime($this->created_at))->diffForHumans();?>
     </div>
   </div>

@@ -83,13 +83,13 @@ if (Input::exists('get')) {
 							</div>-->
 							<div class="form-group col-xs-2">
 								<select id="sortDropDown" class="form-control">
-									<option value="top">Top Rated</option>
 									<option value="new">New</option>
+									<option value="top">Top Rated</option>
 								</select>
 							</div>
 							<div class="col-xs-2 col-xs-offset-8">
 								<?php if ($user->isLoggedIn()) { ?>
-									<a href=<?php echo '"reply.php?id='.$id.'"'?><button type="button" class="btn btn-primary">Post Reply</button></a>
+									<a href=<?php echo '"reply.php?id='.$id.'"'?> class="btn btn-primary">Post Reply</a>
 								<?php } else { ?>
 									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Post Reply</button>
 								<?php } ?>
@@ -126,7 +126,7 @@ if (Input::exists('get')) {
                    You must be logged in to do that!
                 </div>
                 <div class="modal-footer">
-                  <a href="login.php"><button type="button" class="btn btn-default btn-sm"> Login </button></a>
+                  <a href="login.php" class="btn btn-default btn-sm"> Login </a>
                 </div>
           </div>
         </div>

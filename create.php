@@ -2,6 +2,11 @@
 
 require_once('core/init.php');
 
+  $user = new User();
+  if (!$user->isLoggedIn()) {
+    Redirect::to('signup.php');
+  }
+
   //validating the uploaded form data
   if (Input::exists('post')) {
      $validate = new Validate();
