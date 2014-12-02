@@ -1,3 +1,4 @@
+<?php use Carbon\Carbon; ?>
 <div class="col-xs-12 trackReply">
 	<div class="row">
 		<div class="col-xs-2 col-xs-offset-1 trackThumb">
@@ -37,7 +38,7 @@
         			}
         		?>
 				<div class="trackCatDate">
-					<span>posted<span class="daysSincePost"> 5</span> days ago</span>
+					<span>posted <span class="daysSincePost"><?php echo Carbon::createFromTimeStamp(strtotime($this->created_at))->diffForHumans();?></span></span>
 				</div>
 			</div>
 		</div>
