@@ -16,7 +16,8 @@ if (Input::exists('get')) {
     }
   } else if (isset($_GET['search'])) {
     $searchquery = Input::get('search');
-    if ($searchquery[0] === '#') {
+    
+    if ($searchquery != '' && $searchquery[0] === '#') {
       //search by tag
       $searchquery = ltrim($searchquery, '#');
       //Database::getInstance()->query("SELECT `track_id` FROM tagmaps WHERE `type`='track' AND `tag_id` IN (SELECT `id` FROM tags WHERE `name`='".escape($query)."');");
