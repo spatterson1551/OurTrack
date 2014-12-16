@@ -4,7 +4,7 @@
 	//$trackOwner = new User($track[0]->owner_id);
 ?>
 
-<div class="col-xs-12">
+<div style="float:left;">
 	<a href=<?php echo '"profile.php?id='.$news->user_id.'"';?>><?php echo $newsuser->username; ?></a> posted a new track:
-	<?php echo $newstrack[0]->displayForProfile(); ?>
 </div>
+<?php echo $newstrack[0]->displayForProfile(); ?>

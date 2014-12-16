@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12">
-		<div id="trackHead">
+		<div id="trackHead" data-id=<?php echo '"'.$this->id.'"'; ?>>
 			<div class="row">
 				<div class="col-xs-3 tCenter">
 					<img src=<?php echo '"trackImages/'.$this->picture.'"'; ?> height="200" alt="mainTrackImg"/>
@@ -25,9 +25,9 @@
 						</div>
 						<div class="col-xs-2">
 								<?php if($this->userLikesTrack()) { ?>
-									<button type="button" class="btn btn-default unlikeTrack" value="1">Unlike</button>
+									<button type="button" class="btn btn-default unlikeTrack" value=<?php echo '"'.$this->id.'"'; ?>>Unlike</button>
 								<?php } else { ?>
-									<button type="button" class="btn btn-default likeTrack" value="1">Like</button>
+									<button type="button" class="btn btn-default likeTrack" value=<?php echo '"'.$this->id.'"'; ?>>Like</button>
 								<?php } ?>
 						</div>
 					</div>

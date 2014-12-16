@@ -1,3 +1,4 @@
+<script src="js/refuseSearch.js"></script>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -18,9 +19,9 @@
       <ul class="nav navbar-nav">
         <li><div id="spacer"></div></li>
       </ul>
-      <form class="navbar-form navbar-left" role="search" method="get" action="home.php">
+      <form class="navbar-form navbar-left" id="searchForm" role="search" method="get" action="home.php">
           <div class="form-group">
-            <?php if (Input::exists('get') && isset($_GET['search'])) { ?>
+            <?php if (Input::exists('get') && isset($_GET['search']) && !isset($_GET['genre'])) { ?>
               <input id="searchInput" type="text" name="search" class="form-control" placeholder="Search" title="prefix with # to search by tag" data-toggle="tooltip" data-placement="bottom" value=<?php echo '"'.$_GET['search'].'"'?>>
             <?php } else { ?>
               <input id="searchInput" type="text" name="search" class="form-control" placeholder="Search" title="prefix with # to search by tag" data-toggle="tooltip" data-placement="bottom">

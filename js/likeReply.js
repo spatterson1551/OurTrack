@@ -5,18 +5,20 @@ $(document).ready( function(event) {
 			reply_id: $(this).val(),
 		}
 
+		var thisElement = $(this);
+
 		$.ajax({
 			type: 'POST',
 			url: 'likeReply.php', 
 			data: data,
 			success: function(data) {
 				if(data == 'success') { 
-					$(".likeReply").html('Unlike');
-					var currentLikes = $(".likeReply").closest(".trackReply").find('.numLikes').html()
-					//alert(Number(currentLikes));
-					$(".likeReply").closest(".trackReply").find('.numLikes').html(Number(currentLikes) + 1);
-					$(".likeReply").addClass("unlikeReply");
-					$(".likeReply").removeClass("likeReply");
+					$(thisElement).html('Unlike');
+					var parent = $(thisElement).closest(".trackReply");
+					var currentLikes = $(parent).find('.numLikes').html()
+					$(parent).find('.numLikes').html(Number(currentLikes) + 1);
+					$(parent).addClass("unlikeReply");
+					$(parent).removeClass("likeReply");
 				}
 			}
 		})
@@ -27,17 +29,20 @@ $(document).ready( function(event) {
 			reply_id: $(this).val(),
 		}
 
+		var thisElement = $(this);
+
 		$.ajax({
 			type: 'POST',
 			url: 'unlikeReply.php', 
 			data: data,
 			success: function(data) {
 				if(data == 'success') { 
-					$(".unlikeReply").html('Like');
-					var currentLikes = $(".unlikeReply").closest(".trackReply").find('.numLikes').html()
-					$(".unlikeReply").closest(".trackReply").find('.numLikes').html(Number(currentLikes) - 1);
-					$(".unlikeReply").addClass("likeReply");
-					$(".unlikeReply").removeClass("unlikeReply");
+					$(thisElement).html('Like');
+					var parent = $(thisElement).closest(".trackReply");
+					var currentLikes = $(parent).find('.numLikes').html()
+					$(parent).find('.numLikes').html(Number(currentLikes) - 1);
+					$(parent).addClass("likeReply");
+					$(parent).removeClass("unlikeReply");
 				}
 			}
 		})

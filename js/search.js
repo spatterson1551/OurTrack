@@ -2,6 +2,7 @@ $(document).ready( function () {
 	var selectedGenre;
 
 	$( '.categoryListItem' ).click(function() {
+
 		var newCategory = $(this);
 		var prevCategory = $('#categorySelected');
 
@@ -9,13 +10,19 @@ $(document).ready( function () {
 		newCategory.prop('id','categorySelected' );
 		selectedGenre = newCategory.text();
 
+		var method = $("#sortDropDown option:selected").val();
+
+		var searchQuery = $("#searchInput").val();
+
 		var data = {
 			genre: selectedGenre,
+			sortBy: method,
+			searchQuery: searchQuery
 		}
 
 		$.ajax({
 			type: 'POST',
-			url: 'changeCategory.php', //script that will return new tracks based on new selected category
+			url: 'changeBrowseMethod.php', //script that will return new tracks based on new selected category
 			data: data,
 			success: function(data) { 
 				if (data.length) {

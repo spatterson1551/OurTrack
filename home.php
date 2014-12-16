@@ -23,7 +23,7 @@ if (Input::exists('get')) {
       $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id` IN (SELECT `track_id` FROM tagmaps WHERE `type`='track' AND `tag_id` IN (SELECT `id` FROM tags WHERE `name`='".escape($searchquery)."'));" , "Track");
     } else {
       //search by title and description
-      $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `title` LIKE '%".escape($searchquery)."%' OR `description` LIKE '%".escape($searchquery)."%'", "Track");
+      $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `title` LIKE '%".escape($searchquery)."%'", "Track");
     }
   } 
 } else {

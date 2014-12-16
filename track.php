@@ -36,7 +36,7 @@ if (Input::exists('get')) {
   <script src="bootstrap/jquery/jquery-2.0.3.js"></script>
   <script src="js/likeTrack.js"></script>
   <script src="js/likeReply.js"></script>
-  <script src="js/changeSortMethod.js"></script>
+  <script src="js/changeReplySort.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="css/mainLayout.css" rel="stylesheet">
   <link href="css/trackLayout.css" rel="stylesheet">
@@ -50,10 +50,10 @@ if (Input::exists('get')) {
   <!--************* begin content area ****************-->
   <?php 
   		
-  		$replies = Database::getInstance()->fetchToClass("SELECT * FROM replies WHERE `track_id`='".escape($id)."'", "Reply");
+  		$replies = Database::getInstance()->fetchToClass("SELECT * FROM replies WHERE `track_id`='".escape($id)."' ORDER BY `created_at` DESC", "Reply");
   		
-  		$sort = new Sort($replies);
-  		$replies = $sort->sortByLikes();
+  		//$sort = new Sort($replies);
+  		//$replies = $sort->sortByLikes();
 
   ?>
 	<div class="container">
@@ -105,7 +105,7 @@ if (Input::exists('get')) {
 							echo $r->displayMini($ownerIsViewing);
 						}
 
-						 ?>
+						?>
 					<!--EndReply-->
 					</div>
 					</div>
