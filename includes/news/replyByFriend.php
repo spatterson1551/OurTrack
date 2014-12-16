@@ -6,6 +6,6 @@
 ?>
 
 <div style="float:left;">
-	<a href=<?php echo '"profile.php?id='.$news->user_id.'"';?>><?php echo $newsuser->username; ?></a> left a reply to the track: <a href=<?php echo '"track.php?id='.$newstrack[0]->id.'"'; ?>><?php echo $newstrack[0]->title ?></a> by <a href=<?php echo '"profile.php?id='.$newstrackOwner->username.'"';?>><?php echo $newstrackOwner->username; ?></a>
+	<a href=<?php echo '"profile.php?id='.$news->user_id.'"';?>><?php echo $newsuser->username; ?></a> left a reply to the track: <a href=<?php echo '"track.php?id='.$newstrack[0]->id.'"'; ?>><?php echo $newstrack[0]->title ?></a> by <a href=<?php echo '"profile.php?id='.$newstrackOwner->id.'"';?>><?php echo $newstrackOwner->username; ?></a>
 </div>
 <?php echo $newsreply[0]->displayForProfile(); ?>
