@@ -26,6 +26,32 @@
       array_push($allIds, $user2result->user2_id);
     }
     $collaborators = Database::getInstance()->query("SELECT `username`, `id` FROM users WHERE `id` IN (".implode(',', $allIds).")")->results();
+   
+
+    //get all the news feed stuff 
+    $track_ids = array();
+    foreach($tracks as $track) {
+      array_push($track_ids, $track->id);
+    }
+    $friend_ids = array();
+    foreach($collaborators as $collaborator) {
+      array_push($friend_ids, $collaborator->id);
+    }
+    foreach($follows as $follow) {
+      if (!in_array($follow->id, $friend_ids)) {
+        array_push($friend_ids, $follow->id);
+      }
+    }
+    
+    //replies to tracks you have posted query as a string
+    $repliesToUser = "SELECT `owner_id` as user_id, `id` as action_id, `track_id` as object_id, 'replyToUser' as type, `created_at` as created_at FROM replies WHERE `track_id` IN (".implode(",", $track_ids).")";
+    //new tracks posted by friends query as a string
+    $tracksByFriends = "SELECT `owner_id` as user_id, `id` as action_id, NULL as object_id, 'trackByFriend' as type, `created_at` as created_at FROM tracks WHERE `owner_id` IN (".implode(",", $friend_ids).")";
+    //replies to tracks that were left by friends query as a string
+    $repliesByFriends = "SELECT `owner_id` as user_id, `id` as action_id, `track_id` as oject_id, 'replyByFriend' as type, `created_at` as created_at FROM replies WHERE `owner_id` IN (".implode(",", $friend_ids).")";
+
+    //UNION all the above queries together into one giant query that returns all of the info, ordered from newest to oldest.
+    $newsFeedItems = Database::getInstance()->query($repliesToUser." UNION ".$tracksByFriends." UNION ".$repliesByFriends." ORDER BY `created_at` DESC")->results();
   }
 
 ?>
@@ -78,13 +104,19 @@
         <div class="tab-content">
           <div class="tab-pane fade in active" id="news">
             <div class="col-xs-12">
-              <p> List of important news, such as tracks posted by collaborators or users you follow, new friendships made by people you collab with,
-                etc. will go here.
-              </p>
-              <p>
-                *** News Feed functionality is very database intensive (meaning complex SQL queries) and therefore will be implemented in the final stage of the 
-                 project ***
-              </p>
+              <div id="newsFeedSection">
+                <?php 
+                  foreach($newsFeedItems as $news) {
+                    if ($news->type == 'replyToUser') {
+                      include('includes/news/replyToUser.php');
+                    } else if ($news->type == 'trackByFriend') {
+                      include('includes/news/trackByFriend.php');
+                    } else if ($news->type == 'replyByFriend') {
+                      include('includes/news/replyByFriend.php');
+                    }
+                  }
+                ?>
+              </div>
             </div>
           </div>
           <div class="tab-pane fade" id="tracks">

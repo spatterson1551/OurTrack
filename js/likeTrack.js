@@ -5,17 +5,20 @@ $(document).ready( function(event) {
 			track_id: $(this).val(),
 		}
 
+		var thisElement = $(this);
+
 		$.ajax({
 			type: 'POST',
 			url: 'likeTrack.php', 
 			data: data,
 			success: function(data) {
 				if(data == 'success') { 
-					$(".likeTrack").html('Unlike');
-					var currentLikes = $(".likeTrack").closest(".trackListElement").find('.numLikes').html()
-					$(".likeTrack").closest(".trackListElement").find('.numLikes').html(Number(currentLikes) + 1);
-					$(".likeTrack").addClass("unlikeTrack");
-					$(".likeTrack").removeClass("likeTrack");
+					$(thisElement).html('Unlike');
+					var parent = $(thisElement).closest(".trackListElement");
+					var currentLikes = $(parent).find('.numLikes').html();
+					$(parent).find('.numLikes').html(Number(currentLikes) + 1);
+					$(thisElement).addClass("unlikeTrack");
+					$(thisElement).removeClass("likeTrack");
 				}
 			}
 		})
@@ -26,17 +29,20 @@ $(document).ready( function(event) {
 			track_id: $(this).val(),
 		}
 
+		var thisElement = $(this);
+
 		$.ajax({
 			type: 'POST',
 			url: 'unlikeTrack.php', 
 			data: data,
 			success: function(data) {
 				if(data == 'success') { 
-					$(".unlikeTrack").html('Like');
-					var currentLikes = $(".unlikeTrack").closest(".trackListElement").find('.numLikes').html()
-					$(".unlikeTrack").closest(".trackListElement").find('.numLikes').html(Number(currentLikes) - 1);
-					$(".unlikeTrack").addClass("likeTrack");
-					$(".unlikeTrack").removeClass("unlikeTrack");
+					$(thisElement).html('Like');
+					var parent = $(thisElement).closest(".trackListElement");
+					var currentLikes = $(parent).find('.numLikes').html();
+					$(parent).find('.numLikes').html(Number(currentLikes) - 1);
+					$(thisElement).addClass("likeTrack");
+					$(thisElement).removeClass("unlikeTrack");
 				}
 			}
 		})

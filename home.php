@@ -3,16 +3,29 @@
 require_once('core/init.php');
 
 if (Input::exists('get')) {
-  $genre = Input::get('genre');
+  if (isset($_GET['genre'])) {
+    $genre = Input::get('genre');
 
-  if (in_array($genre, $GLOBALS['config']['genres'])) {
-    //good genre value, so retrieve its stuff from the database.
-    $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `genre`='".escape($genre)."'", "Track");
-  } else if ($genre === 'all' || $genre === 'All') {
-    $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks", "Track");
-  } else {
-    Redirect::to(404);
-  }
+    if (in_array($genre, $GLOBALS['config']['genres'])) {
+      //good genre value, so retrieve its stuff from the database.
+      $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `genre`='".escape($genre)."'", "Track");
+    } else if ($genre === 'all' || $genre === 'All') {
+      $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks", "Track");
+    } else {
+      Redirect::to(404);
+    }
+  } else if (isset($_GET['search'])) {
+    $searchquery = Input::get('search');
+    if ($searchquery[0] === '#') {
+      //search by tag
+      $searchquery = ltrim($searchquery, '#');
+      //Database::getInstance()->query("SELECT `track_id` FROM tagmaps WHERE `type`='track' AND `tag_id` IN (SELECT `id` FROM tags WHERE `name`='".escape($query)."');");
+      $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `id` IN (SELECT `track_id` FROM tagmaps WHERE `type`='track' AND `tag_id` IN (SELECT `id` FROM tags WHERE `name`='".escape($searchquery)."'));" , "Track");
+    } else {
+      //search by title and description
+      $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks WHERE `title` LIKE '%".escape($searchquery)."%' OR `description` LIKE '%".escape($searchquery)."%'", "Track");
+    }
+  } 
 } else {
   $tracks = Database::getInstance()->fetchToClass("SELECT * FROM tracks", "Track");
 }
@@ -73,8 +86,12 @@ if (Input::exists('get')) {
       <!-- start tracks here -->
       <div id="trackSection">
        <?php
-        foreach($tracks as $track) {
-          $track->displayMini();
+        if (count($tracks) != 0) {
+          foreach($tracks as $track) {
+            $track->displayMini();
+          }
+        } else {
+          echo 'No results match your criteria';
         }
        ?>
       </div>

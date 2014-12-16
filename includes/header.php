@@ -18,11 +18,13 @@
       <ul class="nav navbar-nav">
         <li><div id="spacer"></div></li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <form class="navbar-form navbar-left" role="search" method="get" action="home.php">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-            <!-- Search functionality is very database intensive (meaning complex SQL queries) and therefore will be implemented in the final stage of the 
-                 project -->
+            <?php if (Input::exists('get') && isset($_GET['search'])) { ?>
+              <input id="searchInput" type="text" name="search" class="form-control" placeholder="Search" title="prefix with # to search by tag" data-toggle="tooltip" data-placement="bottom" value=<?php echo '"'.$_GET['search'].'"'?>>
+            <?php } else { ?>
+              <input id="searchInput" type="text" name="search" class="form-control" placeholder="Search" title="prefix with # to search by tag" data-toggle="tooltip" data-placement="bottom">
+            <?php } ?>
           </div>
           <button type="submit" class="btn btn-default">
             <span class="glyphicon glyphicon-search"></span>

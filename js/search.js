@@ -18,8 +18,14 @@ $(document).ready( function () {
 			url: 'changeCategory.php', //script that will return new tracks based on new selected category
 			data: data,
 			success: function(data) { 
-				$("#trackSection").html(data);
+				if (data.length) {
+					$("#trackSection").html(data);
+				} else {
+					$("#trackSection").html('No results match your criteria');
+				}
 			}
 		})
 	});
+
+	$('#searchInput').tooltip('hide');
 });
