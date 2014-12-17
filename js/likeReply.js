@@ -17,8 +17,8 @@ $(document).ready( function(event) {
 					var parent = $(thisElement).closest(".trackReply");
 					var currentLikes = $(parent).find('.numLikes').html()
 					$(parent).find('.numLikes').html(Number(currentLikes) + 1);
-					$(parent).addClass("unlikeReply");
-					$(parent).removeClass("likeReply");
+					$(thisElement).addClass("unlikeReply");
+					$(thisElement).removeClass("likeReply");
 				}
 			}
 		})
@@ -41,8 +41,8 @@ $(document).ready( function(event) {
 					var parent = $(thisElement).closest(".trackReply");
 					var currentLikes = $(parent).find('.numLikes').html()
 					$(parent).find('.numLikes').html(Number(currentLikes) - 1);
-					$(parent).addClass("likeReply");
-					$(parent).removeClass("unlikeReply");
+					$(thisElement).addClass("likeReply");
+					$(thisElement).removeClass("unlikeReply");
 				}
 			}
 		})

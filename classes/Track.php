@@ -98,6 +98,9 @@ class Track {
 			    if (in_array($user->id, $allIds)) {
 			    	return true;
 			    } else {
+			    	if ($this->owner_id == $user->id) {
+			    		return true;
+			    	}
 			    	return false;
 			    }
 			} else {
